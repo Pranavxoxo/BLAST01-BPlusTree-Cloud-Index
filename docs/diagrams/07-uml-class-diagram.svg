@@ -1,0 +1,161 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1660 1060" width="1660" height="1060"
+     font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" role="img" aria-label="UML class diagram — CloudVault Record Index">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7"
+            orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="context-stroke"/>
+    </marker>
+    <marker id="arrowInk" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7"
+            orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#1B2430"/></marker>
+    <marker id="arrowLeaf" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6"
+            orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" fill="#15803D"/></marker>
+    <marker id="arrowRange" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6"
+            orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" fill="#7C3AED"/></marker>
+    <marker id="arrowPath" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7"
+            orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" fill="#F59E0B"/></marker>
+    <marker id="diamond" viewBox="0 0 14 10" refX="1" refY="5" markerWidth="14" markerHeight="10"
+            orient="auto-start-reverse"><path d="M 1 5 L 7 1 L 13 5 L 7 9 z" fill="#1B2430"/></marker>
+    <marker id="openArrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9"
+            orient="auto"><path d="M 0 0 L 10 5 L 0 10" fill="none" stroke="#1B2430" stroke-width="1.4"/></marker>
+    <marker id="triangle" viewBox="0 0 12 12" refX="11" refY="6" markerWidth="12" markerHeight="12"
+            orient="auto"><path d="M 0 0 L 12 6 L 0 12 z" fill="#FFFFFF" stroke="#1B2430" stroke-width="1.3"/></marker>
+  </defs>
+  <rect width="1660" height="1060" fill="#FFFFFF"/>
+  <text x="34" y="42" font-size="23" font-weight="600" fill="#1B2430">UML class diagram — CloudVault Record Index</text>
+  <text x="34" y="66" font-size="14.5" fill="#5B6B7C">+ public   - private   # nested type.  Filled diamond = composition (owner destroys the part).</text>
+  <rect x="330.0" y="945.0" width="160.0" height="34.0" rx="2" fill="#FFFFFF" stroke="#1B2430" stroke-width="1.2"/>
+  <text x="410.0" y="967.0" font-size="12.5" fill="#1B2430" text-anchor="middle" font-weight="normal" font-family="Menlo, Consolas, 'Courier New', monospace">std::runtime_error</text>
+  <line x1="260.0" y1="962.0" x2="326.0" y2="962.0" stroke="#1B2430" stroke-width="1.3" marker-end="url(#triangle)"/>
+  <rect x="40.0" y="100.0" width="430.0" height="382.0" rx="2" fill="#FFFFFF" stroke="#1B2430" stroke-width="1.4"/>
+  <rect x="40.0" y="100.0" width="430.0" height="30" fill="#E0F2FE" stroke="#1B2430" stroke-width="1.4"/>
+  <text x="255.0" y="121.0" font-size="15" fill="#1B2430" text-anchor="middle" font-weight="700">CloudIndexApp</text>
+  <text x="50.0" y="150.0" font-size="12" fill="#1B2430" text-anchor="start" font-weight="normal" font-family="Menlo, Consolas, 'Courier New', monospace">- index_ : unique_ptr&lt;BPlusTree&gt;</text>
+  <text x="50.0" y="168.0" font-size="12" fill="#1B2430" text-anchor="start" font-weight="normal" font-family="Menlo, Consolas, 'Courier New', monospace">- arrivalOrder_ : vector&lt;int&gt;</text>
+  <line x1="40.0" y1="180.0" x2="470.0" y2="180.0" stroke="#1B2430" stroke-width="1"/>
+  <text x="50.0" y="196.0" font-size="12" fill="#1B2430" text-anchor="start" font-weight="normal" font-family="Menlo, Consolas, 'Courier New', monospace">+ CloudIndexApp(order : int = 4)</text>
+  <text x="50.0" y="214.0" font-size="12" fill="#1B2430" text-anchor="start" font-weight="normal" font-family="Menlo, Consolas, 'Courier New', monospace">+ run() : void</text>
+  <text x="50.0" y="232.0" font-size="12" fill="#1B2430" text-anchor="start" font-weight="normal" font-family="Menlo, Consolas, 'Courier New', monospace">- printBanner() / printMenu() : void</text>
+  <text x="50.0" y="250.0" font-size="12" fill="#1B2430" text-anchor="start" font-weight="normal" font-family="Menlo, Consolas, 'Courier New', monospace">- loadSampleData() : void</text>
+  <text x="50.0" y="268.0" font-size="12" fill="#1B2430" text-anchor="start" font-weight="normal" font-family="Menlo, Consolas, 'Courier New', monospace">- addRecord() : void</text>
+  <text x="50.0" y="286.0" font-size="12" fill="#1B2430" text-anchor="start" font-weight="normal" font-family="Menlo, Consolas, 'Courier New', monospace">- searchRecord() : void</text>
+  <text x="50.0" y="304.0" font-size="12" fill="#1B2430" text-anchor="start" font-weight="normal" font-family="Menlo, Consolas, 'Courier New', monospace">- rangeSearch() : void</text>
+  <text x="50.0" y="322.0" font-size="12" fill="#1B2430" text-anchor="start" font-weight="normal" font-family="Menlo, Consolas, 'Courier New', monospace">- updateRecord() : void</text>
+  <text x="50.0" y="340.0" font-size="12" fill="#1B2430" text-anchor="start" font-weight="normal" font-family="Menlo, Consolas, 'Courier New', monospace">- deleteRecord() : void</text>
+  <text x="50.0" y="358.0" font-size="12" fill="#1B2430" text-anchor="start" font-weight="normal" font-family="Menlo, Consolas, 'Courier New', monospace">- showStructure() / showAllRecords() : void</text>
+  <text x="50.0" y="376.0" font-size="12" fill="#1B2430" text-anchor="start" font-weight="normal" font-family="Menlo, Consolas, 'Courier New', monospace">- showStatistics() : void</text>
+  <text x="50.0" y="394.0" font-size="12" fill="#1B2430" text-anchor="start" font-weight="normal" font-family="Menlo, Consolas, 'Courier New', monospace">- compareWithFullScan() : void</text>
+  <text x="50.0" y="412.0" font-size="12" fill="#1B2430" text-anchor="start" font-weight="normal" font-family="Menlo, Consolas, 'Courier New', monospace">- scalabilityExperiment() : void</text>
+  <text x="50.0" y="430.0" font-size="12" fill="#1B2430" text-anchor="start" font-weight="normal" font-family="Menlo, Consolas, 'Courier New', monospace">- rebuildWithNewOrder() : void</text>
+  <text x="50.0" y="448.0" font-size="12" fill="#1B2430" text-anchor="start" font-weight="normal" font-family="Menlo, Consolas, 'Courier New', monospace">- readRecordId(prompt) : int</text>
+  <text x="50.0" y="466.0" font-size="12" fill="#1B2430" text-anchor="start" font-weight="normal" font-family="Menlo, Consolas, 'Courier New', monospace">- readRecordFields(id) : CloudRecord</text>
+  <rect x="600.0" y="100.0" width="520.0" height="472.0" rx="2" fill="#FFFFFF" stroke="#1B2430" stroke-width="1.4"/>
+  <rect x="600.0" y="100.0" width="520.0" height="30" fill="#E0F2FE" stroke="#1B2430" stroke-width="1.4"/>
+  <text x="860.0" y="121.0" font-size="15" fill="#1B2430" text-anchor="middle" font-weight="700">BPlusTree</text>
+  <text x="610.0" y="150.0" font-size="12" fill="#1B2430" text-anchor="start" font-weight="normal" font-family="Menlo, Consolas, 'Courier New', monospace">- root_ : Node*</text>
+  <text x="610.0" y="168.0" font-size="12" fill="#1B2430" text-anchor="start" font-weight="normal" font-family="Menlo, Consolas, 'Courier New', monospace">- order_ : int</text>
+  <text x="610.0" y="186.0" font-size="12" fill="#1B2430" text-anchor="start" font-weight="normal" font-family="Menlo, Consolas, 'Courier New', monospace">- size_ : int</text>
+  <text x="610.0" y="204.0" font-size="12" fill="#1B2430" text-anchor="start" font-weight="normal" font-family="Menlo, Consolas, 'Courier New', monospace">- splits_, merges_, borrows_ : int</text>
+  <text x="610.0" y="222.0" font-size="12" fill="#1B2430" text-anchor="start" font-weight="normal" font-family="Menlo, Consolas, 'Courier New', monospace">- changes_ : vector&lt;string&gt;</text>
+  <line x1="600.0" y1="234.0" x2="1120.0" y2="234.0" stroke="#1B2430" stroke-width="1"/>
+  <text x="610.0" y="250.0" font-size="12" fill="#1B2430" text-anchor="start" font-weight="normal" font-family="Menlo, Consolas, 'Courier New', monospace">+ BPlusTree(order : int = 4)</text>
+  <text x="610.0" y="268.0" font-size="12" fill="#1B2430" text-anchor="start" font-weight="normal" font-family="Menlo, Consolas, 'Courier New', monospace">+ insert(rec : const CloudRecord&amp;) : bool</text>
+  <text x="610.0" y="286.0" font-size="12" fill="#1B2430" text-anchor="start" font-weight="normal" font-family="Menlo, Consolas, 'Courier New', monospace">+ search(key : int, stats : SearchStats*) : const CloudRecord*</text>
+  <text x="610.0" y="304.0" font-size="12" fill="#1B2430" text-anchor="start" font-weight="normal" font-family="Menlo, Consolas, 'Courier New', monospace">+ update(rec : const CloudRecord&amp;) : bool</text>
+  <text x="610.0" y="322.0" font-size="12" fill="#1B2430" text-anchor="start" font-weight="normal" font-family="Menlo, Consolas, 'Courier New', monospace">+ remove(key : int) : bool</text>
+  <text x="610.0" y="340.0" font-size="12" fill="#1B2430" text-anchor="start" font-weight="normal" font-family="Menlo, Consolas, 'Courier New', monospace">+ rangeQuery(low, high : int, stats) : vector&lt;CloudRecord&gt;</text>
+  <text x="610.0" y="358.0" font-size="12" fill="#1B2430" text-anchor="start" font-weight="normal" font-family="Menlo, Consolas, 'Courier New', monospace">+ allRecords() : vector&lt;CloudRecord&gt;</text>
+  <text x="610.0" y="376.0" font-size="12" fill="#1B2430" text-anchor="start" font-weight="normal" font-family="Menlo, Consolas, 'Courier New', monospace">+ height() / size() / nodeCount() / leafCount() : int</text>
+  <text x="610.0" y="394.0" font-size="12" fill="#1B2430" text-anchor="start" font-weight="normal" font-family="Menlo, Consolas, 'Courier New', monospace">+ printTree(out) / printLeafChain(out) : void</text>
+  <text x="610.0" y="412.0" font-size="12" fill="#1B2430" text-anchor="start" font-weight="normal" font-family="Menlo, Consolas, 'Courier New', monospace">+ lastChanges() : const vector&lt;string&gt;&amp;</text>
+  <text x="610.0" y="430.0" font-size="12" fill="#1B2430" text-anchor="start" font-weight="normal" font-family="Menlo, Consolas, 'Courier New', monospace">+ validate(error : string*) : bool</text>
+  <text x="610.0" y="448.0" font-size="12" fill="#1B2430" text-anchor="start" font-weight="normal" font-family="Menlo, Consolas, 'Courier New', monospace">- findLeaf(key, stats) : Node*</text>
+  <text x="610.0" y="466.0" font-size="12" fill="#1B2430" text-anchor="start" font-weight="normal" font-family="Menlo, Consolas, 'Courier New', monospace">- insertInto(node, rec, promotedKey&amp;, newSibling&amp;) : bool</text>
+  <text x="610.0" y="484.0" font-size="12" fill="#1B2430" text-anchor="start" font-weight="normal" font-family="Menlo, Consolas, 'Courier New', monospace">- splitLeaf(...) / splitInternal(...) : void</text>
+  <text x="610.0" y="502.0" font-size="12" fill="#1B2430" text-anchor="start" font-weight="normal" font-family="Menlo, Consolas, 'Courier New', monospace">- removeFrom(node, key) : bool</text>
+  <text x="610.0" y="520.0" font-size="12" fill="#1B2430" text-anchor="start" font-weight="normal" font-family="Menlo, Consolas, 'Courier New', monospace">- fixUnderflow(parent, childPos) : void</text>
+  <text x="610.0" y="538.0" font-size="12" fill="#1B2430" text-anchor="start" font-weight="normal" font-family="Menlo, Consolas, 'Courier New', monospace">- borrowFromLeft(...) / borrowFromRight(...) : void</text>
+  <text x="610.0" y="556.0" font-size="12" fill="#1B2430" text-anchor="start" font-weight="normal" font-family="Menlo, Consolas, 'Courier New', monospace">- mergeChildren(parent, leftPos) : void</text>
+  <rect x="1240.0" y="100.0" width="320.0" height="176.0" rx="2" fill="#FFFFFF" stroke="#1B2430" stroke-width="1.4"/>
+  <rect x="1240.0" y="100.0" width="320.0" height="40" fill="#E0F2FE" stroke="#1B2430" stroke-width="1.4"/>
+  <text x="1400.0" y="115.0" font-size="11.5" fill="#5B6B7C" text-anchor="middle" font-weight="normal" font-style="italic">«struct» # nested, private</text>
+  <text x="1400.0" y="133.0" font-size="15" fill="#1B2430" text-anchor="middle" font-weight="700">BPlusTree::Node</text>
+  <text x="1250.0" y="160.0" font-size="12" fill="#1B2430" text-anchor="start" font-weight="normal" font-family="Menlo, Consolas, 'Courier New', monospace">+ leaf : bool</text>
+  <text x="1250.0" y="178.0" font-size="12" fill="#1B2430" text-anchor="start" font-weight="normal" font-family="Menlo, Consolas, 'Courier New', monospace">+ keys : vector&lt;int&gt;</text>
+  <text x="1250.0" y="196.0" font-size="12" fill="#1B2430" text-anchor="start" font-weight="normal" font-family="Menlo, Consolas, 'Courier New', monospace">+ children : vector&lt;Node*&gt;</text>
+  <text x="1250.0" y="214.0" font-size="12" fill="#1B2430" text-anchor="start" font-weight="normal" font-family="Menlo, Consolas, 'Courier New', monospace">+ records : vector&lt;CloudRecord&gt;</text>
+  <text x="1250.0" y="232.0" font-size="12" fill="#1B2430" text-anchor="start" font-weight="normal" font-family="Menlo, Consolas, 'Courier New', monospace">+ next : Node*</text>
+  <line x1="1240.0" y1="244.0" x2="1560.0" y2="244.0" stroke="#1B2430" stroke-width="1"/>
+  <text x="1250.0" y="260.0" font-size="12" fill="#1B2430" text-anchor="start" font-weight="normal" font-family="Menlo, Consolas, 'Courier New', monospace">+ Node(isLeaf : bool)</text>
+  <rect x="1240.0" y="420.0" width="320.0" height="230.0" rx="2" fill="#FFFFFF" stroke="#1B2430" stroke-width="1.4"/>
+  <rect x="1240.0" y="420.0" width="320.0" height="40" fill="#E0F2FE" stroke="#1B2430" stroke-width="1.4"/>
+  <text x="1400.0" y="435.0" font-size="11.5" fill="#5B6B7C" text-anchor="middle" font-weight="normal" font-style="italic">«struct»</text>
+  <text x="1400.0" y="453.0" font-size="15" fill="#1B2430" text-anchor="middle" font-weight="700">CloudRecord</text>
+  <text x="1250.0" y="480.0" font-size="12" fill="#1B2430" text-anchor="start" font-weight="normal" font-family="Menlo, Consolas, 'Courier New', monospace">+ recordId : int  {key}</text>
+  <text x="1250.0" y="498.0" font-size="12" fill="#1B2430" text-anchor="start" font-weight="normal" font-family="Menlo, Consolas, 'Courier New', monospace">+ tenant : string</text>
+  <text x="1250.0" y="516.0" font-size="12" fill="#1B2430" text-anchor="start" font-weight="normal" font-family="Menlo, Consolas, 'Courier New', monospace">+ resourceType : string</text>
+  <text x="1250.0" y="534.0" font-size="12" fill="#1B2430" text-anchor="start" font-weight="normal" font-family="Menlo, Consolas, 'Courier New', monospace">+ region : string</text>
+  <text x="1250.0" y="552.0" font-size="12" fill="#1B2430" text-anchor="start" font-weight="normal" font-family="Menlo, Consolas, 'Courier New', monospace">+ sizeGB : double</text>
+  <text x="1250.0" y="570.0" font-size="12" fill="#1B2430" text-anchor="start" font-weight="normal" font-family="Menlo, Consolas, 'Courier New', monospace">+ createdDate : string</text>
+  <line x1="1240.0" y1="582.0" x2="1560.0" y2="582.0" stroke="#1B2430" stroke-width="1"/>
+  <text x="1250.0" y="598.0" font-size="12" fill="#1B2430" text-anchor="start" font-weight="normal" font-family="Menlo, Consolas, 'Courier New', monospace">+ CloudRecord(id, tenant, type,</text>
+  <text x="1250.0" y="616.0" font-size="12" fill="#1B2430" text-anchor="start" font-weight="normal" font-family="Menlo, Consolas, 'Courier New', monospace">      region, size, date)</text>
+  <text x="1250.0" y="634.0" font-size="12" fill="#1B2430" text-anchor="start" font-weight="normal" font-family="Menlo, Consolas, 'Courier New', monospace">+ summary() : string</text>
+  <rect x="600.0" y="640.0" width="320.0" height="140.0" rx="2" fill="#FFFFFF" stroke="#1B2430" stroke-width="1.4"/>
+  <rect x="600.0" y="640.0" width="320.0" height="40" fill="#E0F2FE" stroke="#1B2430" stroke-width="1.4"/>
+  <text x="760.0" y="655.0" font-size="11.5" fill="#5B6B7C" text-anchor="middle" font-weight="normal" font-style="italic">«struct»</text>
+  <text x="760.0" y="673.0" font-size="15" fill="#1B2430" text-anchor="middle" font-weight="700">SearchStats</text>
+  <text x="610.0" y="700.0" font-size="12" fill="#1B2430" text-anchor="start" font-weight="normal" font-family="Menlo, Consolas, 'Courier New', monospace">+ nodesVisited : int</text>
+  <text x="610.0" y="718.0" font-size="12" fill="#1B2430" text-anchor="start" font-weight="normal" font-family="Menlo, Consolas, 'Courier New', monospace">+ keyComparisons : int</text>
+  <text x="610.0" y="736.0" font-size="12" fill="#1B2430" text-anchor="start" font-weight="normal" font-family="Menlo, Consolas, 'Courier New', monospace">+ leavesScanned : int</text>
+  <text x="610.0" y="754.0" font-size="12" fill="#1B2430" text-anchor="start" font-weight="normal" font-family="Menlo, Consolas, 'Courier New', monospace">+ path : vector&lt;string&gt;</text>
+  <line x1="600.0" y1="766.0" x2="920.0" y2="766.0" stroke="#1B2430" stroke-width="1"/>
+  <rect x="40.0" y="640.0" width="430.0" height="212.0" rx="2" fill="#FFFFFF" stroke="#1B2430" stroke-width="1.4"/>
+  <rect x="40.0" y="640.0" width="430.0" height="40" fill="#E0F2FE" stroke="#1B2430" stroke-width="1.4"/>
+  <text x="255.0" y="655.0" font-size="11.5" fill="#5B6B7C" text-anchor="middle" font-weight="normal" font-style="italic">«namespace» utility functions</text>
+  <text x="255.0" y="673.0" font-size="15" fill="#1B2430" text-anchor="middle" font-weight="700">input</text>
+  <line x1="40.0" y1="694.0" x2="470.0" y2="694.0" stroke="#1B2430" stroke-width="1"/>
+  <text x="50.0" y="710.0" font-size="12" fill="#1B2430" text-anchor="start" font-weight="normal" font-family="Menlo, Consolas, 'Courier New', monospace">+ isScripted() : bool</text>
+  <text x="50.0" y="728.0" font-size="12" fill="#1B2430" text-anchor="start" font-weight="normal" font-family="Menlo, Consolas, 'Courier New', monospace">+ readLine(prompt) : string</text>
+  <text x="50.0" y="746.0" font-size="12" fill="#1B2430" text-anchor="start" font-weight="normal" font-family="Menlo, Consolas, 'Courier New', monospace">+ readInt(prompt, min, max) : int</text>
+  <text x="50.0" y="764.0" font-size="12" fill="#1B2430" text-anchor="start" font-weight="normal" font-family="Menlo, Consolas, 'Courier New', monospace">+ readDouble(prompt, min, max) : double</text>
+  <text x="50.0" y="782.0" font-size="12" fill="#1B2430" text-anchor="start" font-weight="normal" font-family="Menlo, Consolas, 'Courier New', monospace">+ readName(prompt, maxLen) : string</text>
+  <text x="50.0" y="800.0" font-size="12" fill="#1B2430" text-anchor="start" font-weight="normal" font-family="Menlo, Consolas, 'Courier New', monospace">+ readDate(prompt) : string</text>
+  <text x="50.0" y="818.0" font-size="12" fill="#1B2430" text-anchor="start" font-weight="normal" font-family="Menlo, Consolas, 'Courier New', monospace">+ readChoice(title, options) : int</text>
+  <text x="50.0" y="836.0" font-size="12" fill="#1B2430" text-anchor="start" font-weight="normal" font-family="Menlo, Consolas, 'Courier New', monospace">+ readYesNo(prompt) : bool</text>
+  <rect x="40.0" y="935.0" width="220.0" height="68.0" rx="2" fill="#FFFFFF" stroke="#1B2430" stroke-width="1.4"/>
+  <rect x="40.0" y="935.0" width="220.0" height="40" fill="#E0F2FE" stroke="#1B2430" stroke-width="1.4"/>
+  <text x="150.0" y="950.0" font-size="11.5" fill="#5B6B7C" text-anchor="middle" font-weight="normal" font-style="italic">«exception»</text>
+  <text x="150.0" y="968.0" font-size="15" fill="#1B2430" text-anchor="middle" font-weight="700">InputClosed</text>
+  <line x1="40.0" y1="989.0" x2="260.0" y2="989.0" stroke="#1B2430" stroke-width="1"/>
+  <line x1="472.0" y1="160.0" x2="598.0" y2="160.0" stroke="#1B2430" stroke-width="1.4" marker-start="url(#diamond)"/>
+  <text x="486.0" y="152.0" font-size="12" fill="#1B2430" text-anchor="start" font-weight="normal">1</text>
+  <text x="585.0" y="152.0" font-size="12" fill="#1B2430" text-anchor="end" font-weight="normal">1</text>
+  <text x="535.0" y="178.0" font-size="12" fill="#5B6B7C" text-anchor="middle" font-weight="normal" font-style="italic">owns</text>
+  <line x1="1122.0" y1="160.0" x2="1238.0" y2="160.0" stroke="#1B2430" stroke-width="1.4" marker-start="url(#diamond)"/>
+  <text x="1136.0" y="152.0" font-size="12" fill="#1B2430" text-anchor="start" font-weight="normal">1</text>
+  <text x="1226.0" y="152.0" font-size="12" fill="#1B2430" text-anchor="end" font-weight="normal">0..*</text>
+  <text x="1180.0" y="178.0" font-size="12" fill="#5B6B7C" text-anchor="middle" font-weight="normal" font-style="italic">root_</text>
+  <path d="M 1560 160 h 26 v 80 h -26" fill="none" stroke="#1B2430" stroke-width="1.3" marker-end="url(#openArrow)"/>
+  <text x="1592.0" y="204.0" font-size="11.5" fill="#5B6B7C" text-anchor="start" font-weight="normal">children</text>
+  <text x="1592.0" y="218.0" font-size="11.5" fill="#5B6B7C" text-anchor="start" font-weight="normal">next</text>
+  <line x1="1400.0" y1="278.0" x2="1400.0" y2="418.0" stroke="#1B2430" stroke-width="1.4" marker-start="url(#diamond)"/>
+  <text x="1410.0" y="298.0" font-size="12" fill="#1B2430" text-anchor="start" font-weight="normal">1</text>
+  <text x="1410.0" y="412.0" font-size="12" fill="#1B2430" text-anchor="start" font-weight="normal">0..m-1  (leaf only)</text>
+  <line x1="760.0" y1="574.0" x2="760.0" y2="636.0" stroke="#1B2430" stroke-width="1.3" marker-end="url(#openArrow)" stroke-dasharray="6 4"/>
+  <text x="770.0" y="620.0" font-size="12" fill="#5B6B7C" text-anchor="start" font-weight="normal" font-style="italic">«uses» fills</text>
+  <line x1="255.0" y1="484.0" x2="255.0" y2="636.0" stroke="#1B2430" stroke-width="1.3" marker-end="url(#openArrow)" stroke-dasharray="6 4"/>
+  <text x="265.0" y="620.0" font-size="12" fill="#5B6B7C" text-anchor="start" font-weight="normal" font-style="italic">«uses» all console input</text>
+  <path d="M 472 300 H 560 V 600 H 1180 V 520 H 1236" fill="none" stroke="#1B2430" stroke-width="1.3" stroke-dasharray="6 4" marker-end="url(#openArrow)"/>
+  <text x="1000.0" y="594.0" font-size="12" fill="#5B6B7C" text-anchor="start" font-weight="normal" font-style="italic">«uses» builds / displays records</text>
+  <line x1="150.0" y1="854.0" x2="150.0" y2="931.0" stroke="#1B2430" stroke-width="1.3" marker-end="url(#openArrow)" stroke-dasharray="6 4"/>
+  <text x="160.0" y="920.0" font-size="12" fill="#5B6B7C" text-anchor="start" font-weight="normal" font-style="italic">«throws»</text>
+  <rect x="1000.0" y="860.0" width="260.0" height="86.0" rx="2" fill="#FFFFFF" stroke="#1B2430" stroke-width="1.4"/>
+  <rect x="1000.0" y="860.0" width="260.0" height="40" fill="#E0F2FE" stroke="#1B2430" stroke-width="1.4"/>
+  <text x="1130.0" y="875.0" font-size="11.5" fill="#5B6B7C" text-anchor="middle" font-weight="normal" font-style="italic">«entry point»</text>
+  <text x="1130.0" y="893.0" font-size="15" fill="#1B2430" text-anchor="middle" font-weight="700">main.cpp</text>
+  <line x1="1000.0" y1="914.0" x2="1260.0" y2="914.0" stroke="#1B2430" stroke-width="1"/>
+  <text x="1010.0" y="930.0" font-size="12" fill="#1B2430" text-anchor="start" font-weight="normal" font-family="Menlo, Consolas, 'Courier New', monospace">+ main(argc, argv) : int</text>
+  <line x1="1000.0" y1="905.0" x2="495.0" y2="905.0" stroke="#1B2430" stroke-width="1.3" stroke-dasharray="6 4"/>
+  <path d="M 495 905 V 420 H 474" fill="none" stroke="#1B2430" stroke-width="1.3" stroke-dasharray="6 4" marker-end="url(#openArrow)"/>
+  <text x="760.0" y="897.0" font-size="12" fill="#5B6B7C" text-anchor="middle" font-weight="normal" font-style="italic">«creates» CloudIndexApp(order) and calls run()</text>
+</svg>

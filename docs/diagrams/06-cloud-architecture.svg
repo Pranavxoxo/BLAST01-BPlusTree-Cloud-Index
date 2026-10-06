@@ -1,0 +1,105 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 790" width="1440" height="790"
+     font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" role="img" aria-label="Where the B+ tree sits in a cloud database service">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7"
+            orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="context-stroke"/>
+    </marker>
+    <marker id="arrowInk" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7"
+            orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#1B2430"/></marker>
+    <marker id="arrowLeaf" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6"
+            orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" fill="#15803D"/></marker>
+    <marker id="arrowRange" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6"
+            orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" fill="#7C3AED"/></marker>
+    <marker id="arrowPath" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7"
+            orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" fill="#F59E0B"/></marker>
+    <marker id="diamond" viewBox="0 0 14 10" refX="1" refY="5" markerWidth="14" markerHeight="10"
+            orient="auto-start-reverse"><path d="M 1 5 L 7 1 L 13 5 L 7 9 z" fill="#1B2430"/></marker>
+    <marker id="openArrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9"
+            orient="auto"><path d="M 0 0 L 10 5 L 0 10" fill="none" stroke="#1B2430" stroke-width="1.4"/></marker>
+    <marker id="triangle" viewBox="0 0 12 12" refX="11" refY="6" markerWidth="12" markerHeight="12"
+            orient="auto"><path d="M 0 0 L 12 6 L 0 12 z" fill="#FFFFFF" stroke="#1B2430" stroke-width="1.3"/></marker>
+  </defs>
+  <rect width="1440" height="790" fill="#FFFFFF"/>
+  <text x="34" y="42" font-size="23" font-weight="600" fill="#1B2430">Where the B+ tree sits in a cloud database service</text>
+  <text x="34" y="66" font-size="14.5" fill="#5B6B7C">Simplified read path for "GET record 1052" in a managed cloud database (e.g. Amazon Aurora, Azure SQL, Cloud SQL).</text>
+  <rect x="40.0" y="130.0" width="220.0" height="110.0" rx="8" fill="#F1F5F9" stroke="#C3CEDA" stroke-width="1.5"/>
+  <text x="150.0" y="156.0" font-size="15" fill="#1B2430" text-anchor="middle" font-weight="700">Client apps</text>
+  <text x="150.0" y="178.0" font-size="12.5" fill="#5B6B7C" text-anchor="middle" font-weight="normal">web / mobile / services</text>
+  <text x="150.0" y="197.0" font-size="12.5" fill="#5B6B7C" text-anchor="middle" font-weight="normal">send queries over HTTPS</text>
+  <rect x="330.0" y="130.0" width="240.0" height="110.0" rx="8" fill="#F1F5F9" stroke="#C3CEDA" stroke-width="1.5"/>
+  <text x="450.0" y="156.0" font-size="15" fill="#1B2430" text-anchor="middle" font-weight="700">API / SQL endpoint</text>
+  <text x="450.0" y="178.0" font-size="12.5" fill="#5B6B7C" text-anchor="middle" font-weight="normal">auth, routing to</text>
+  <text x="450.0" y="197.0" font-size="12.5" fill="#5B6B7C" text-anchor="middle" font-weight="normal">the right partition</text>
+  <rect x="640.0" y="130.0" width="250.0" height="110.0" rx="8" fill="#FEF3C7" stroke="#F59E0B" stroke-width="1.5"/>
+  <text x="765.0" y="156.0" font-size="15" fill="#1B2430" text-anchor="middle" font-weight="700">Query engine</text>
+  <text x="765.0" y="178.0" font-size="12.5" fill="#5B6B7C" text-anchor="middle" font-weight="normal">parses the request,</text>
+  <text x="765.0" y="197.0" font-size="12.5" fill="#5B6B7C" text-anchor="middle" font-weight="normal">chooses: index or full scan?</text>
+  <line x1="260.0" y1="185.0" x2="326.0" y2="185.0" stroke="#1B2430" stroke-width="1.6" marker-end="url(#arrowInk)"/>
+  <line x1="570.0" y1="185.0" x2="636.0" y2="185.0" stroke="#1B2430" stroke-width="1.6" marker-end="url(#arrowInk)"/>
+  <rect x="960.0" y="110.0" width="440.0" height="360.0" rx="10" fill="#F8FAFC" stroke="#0369A1" stroke-width="2"/>
+  <text x="1180.0" y="138.0" font-size="16" fill="#0369A1" text-anchor="middle" font-weight="700">B+ tree index on record_id</text>
+  <rect x="1134.0" y="160.0" width="92.0" height="32.0" rx="5" fill="#E0F2FE" stroke="#0369A1" stroke-width="1.6"/>
+  <text x="1157.0" y="181.0" font-size="14" fill="#1B2430" text-anchor="middle" font-weight="600" font-family="Menlo, Consolas, 'Courier New', monospace">1034</text>
+  <line x1="1180.0" y1="160.0" x2="1180.0" y2="192.0" stroke="#0369A1" stroke-width="1"/>
+  <text x="1203.0" y="181.0" font-size="14" fill="#1B2430" text-anchor="middle" font-weight="600" font-family="Menlo, Consolas, 'Courier New', monospace">1058</text>
+  <rect x="1020.0" y="240.0" width="92.0" height="32.0" rx="5" fill="#E0F2FE" stroke="#0369A1" stroke-width="1.6"/>
+  <text x="1043.0" y="261.0" font-size="14" fill="#1B2430" text-anchor="middle" font-weight="600" font-family="Menlo, Consolas, 'Courier New', monospace">1012</text>
+  <line x1="1066.0" y1="240.0" x2="1066.0" y2="272.0" stroke="#0369A1" stroke-width="1"/>
+  <text x="1089.0" y="261.0" font-size="14" fill="#1B2430" text-anchor="middle" font-weight="600" font-family="Menlo, Consolas, 'Courier New', monospace">1021</text>
+  <rect x="1134.0" y="240.0" width="92.0" height="32.0" rx="5" fill="#E0F2FE" stroke="#F59E0B" stroke-width="3"/>
+  <text x="1157.0" y="261.0" font-size="14" fill="#1B2430" text-anchor="middle" font-weight="600" font-family="Menlo, Consolas, 'Courier New', monospace">1040</text>
+  <line x1="1180.0" y1="240.0" x2="1180.0" y2="272.0" stroke="#F59E0B" stroke-width="1"/>
+  <text x="1203.0" y="261.0" font-size="14" fill="#1B2430" text-anchor="middle" font-weight="600" font-family="Menlo, Consolas, 'Courier New', monospace">1047</text>
+  <rect x="1250.0" y="240.0" width="92.0" height="32.0" rx="5" fill="#E0F2FE" stroke="#0369A1" stroke-width="1.6"/>
+  <text x="1273.0" y="261.0" font-size="14" fill="#1B2430" text-anchor="middle" font-weight="600" font-family="Menlo, Consolas, 'Courier New', monospace">1066</text>
+  <line x1="1296.0" y1="240.0" x2="1296.0" y2="272.0" stroke="#0369A1" stroke-width="1"/>
+  <text x="1319.0" y="261.0" font-size="14" fill="#1B2430" text-anchor="middle" font-weight="600" font-family="Menlo, Consolas, 'Courier New', monospace">1075</text>
+  <line x1="1134.0" y1="192.0" x2="1066.0" y2="240.0" stroke="#5B6B7C" stroke-width="1.4"/>
+  <line x1="1180.0" y1="192.0" x2="1180.0" y2="240.0" stroke="#F59E0B" stroke-width="3"/>
+  <line x1="1226.0" y1="192.0" x2="1296.0" y2="240.0" stroke="#5B6B7C" stroke-width="1.4"/>
+  <rect x="990.0" y="330.0" width="92.0" height="32.0" rx="5" fill="#DCFCE7" stroke="#15803D" stroke-width="1.6"/>
+  <text x="1013.0" y="351.0" font-size="14" fill="#1B2430" text-anchor="middle" font-weight="600" font-family="Menlo, Consolas, 'Courier New', monospace">1034</text>
+  <line x1="1036.0" y1="330.0" x2="1036.0" y2="362.0" stroke="#15803D" stroke-width="1"/>
+  <text x="1059.0" y="351.0" font-size="14" fill="#1B2430" text-anchor="middle" font-weight="600" font-family="Menlo, Consolas, 'Courier New', monospace">1038</text>
+  <line x1="1083.0" y1="346.0" x2="1090.0" y2="346.0" stroke="#15803D" stroke-width="1.3" marker-end="url(#arrowLeaf)"/>
+  <rect x="1092.0" y="330.0" width="92.0" height="32.0" rx="5" fill="#DCFCE7" stroke="#15803D" stroke-width="1.6"/>
+  <text x="1115.0" y="351.0" font-size="14" fill="#1B2430" text-anchor="middle" font-weight="600" font-family="Menlo, Consolas, 'Courier New', monospace">1040</text>
+  <line x1="1138.0" y1="330.0" x2="1138.0" y2="362.0" stroke="#15803D" stroke-width="1"/>
+  <text x="1161.0" y="351.0" font-size="14" fill="#1B2430" text-anchor="middle" font-weight="600" font-family="Menlo, Consolas, 'Courier New', monospace">1044</text>
+  <line x1="1185.0" y1="346.0" x2="1192.0" y2="346.0" stroke="#15803D" stroke-width="1.3" marker-end="url(#arrowLeaf)"/>
+  <rect x="1194.0" y="330.0" width="92.0" height="32.0" rx="5" fill="#DCFCE7" stroke="#F59E0B" stroke-width="3"/>
+  <text x="1217.0" y="351.0" font-size="14" fill="#1B2430" text-anchor="middle" font-weight="600" font-family="Menlo, Consolas, 'Courier New', monospace">1047</text>
+  <line x1="1240.0" y1="330.0" x2="1240.0" y2="362.0" stroke="#F59E0B" stroke-width="1"/>
+  <text x="1263.0" y="351.0" font-size="14" fill="#1B2430" text-anchor="middle" font-weight="600" font-family="Menlo, Consolas, 'Courier New', monospace">1052</text>
+  <line x1="1287.0" y1="346.0" x2="1294.0" y2="346.0" stroke="#15803D" stroke-width="1.3" marker-end="url(#arrowLeaf)"/>
+  <rect x="1296.0" y="330.0" width="92.0" height="32.0" rx="5" fill="#DCFCE7" stroke="#15803D" stroke-width="1.6"/>
+  <text x="1319.0" y="351.0" font-size="14" fill="#1B2430" text-anchor="middle" font-weight="600" font-family="Menlo, Consolas, 'Courier New', monospace">1058</text>
+  <line x1="1342.0" y1="330.0" x2="1342.0" y2="362.0" stroke="#15803D" stroke-width="1"/>
+  <text x="1365.0" y="351.0" font-size="14" fill="#1B2430" text-anchor="middle" font-weight="600" font-family="Menlo, Consolas, 'Courier New', monospace">1063</text>
+  <line x1="1226.0" y1="272.0" x2="1194.0" y2="330.0" stroke="#F59E0B" stroke-width="3"/>
+  <text x="1180.0" y="395.0" font-size="12.5" fill="#5B6B7C" text-anchor="middle" font-weight="normal">root + internal pages: tiny, stay cached in RAM</text>
+  <text x="1180.0" y="415.0" font-size="12.5" fill="#5B6B7C" text-anchor="middle" font-weight="normal">leaf pages: on SSD / network block storage</text>
+  <text x="1180.0" y="445.0" font-size="13" fill="#0369A1" text-anchor="middle" font-weight="700">1 page read per level → 3–4 reads for millions of rows</text>
+  <line x1="890.0" y1="185.0" x2="956.0" y2="185.0" stroke="#F59E0B" stroke-width="2.4" marker-end="url(#arrowPath)"/>
+  <text x="923.0" y="175.0" font-size="12" fill="#F59E0B" text-anchor="middle" font-weight="600">index</text>
+  <rect x="40.0" y="520.0" width="850.0" height="100.0" rx="8" fill="#F1F5F9" stroke="#C3CEDA" stroke-width="1.5"/>
+  <text x="465.0" y="546.0" font-size="15" fill="#1B2430" text-anchor="middle" font-weight="700">Distributed storage layer</text>
+  <text x="465.0" y="568.0" font-size="12.5" fill="#5B6B7C" text-anchor="middle" font-weight="normal">pages replicated across availability zones (e.g. Aurora keeps 6 copies across 3 AZs)</text>
+  <text x="465.0" y="587.0" font-size="12.5" fill="#5B6B7C" text-anchor="middle" font-weight="normal">a page = one B+ tree node (16 KB in MySQL InnoDB, 8 KB in PostgreSQL and SQL Server)</text>
+  <line x1="1180.0" y1="470.0" x2="1180.0" y2="570.0" stroke="#1B2430" stroke-width="1.6"/>
+  <line x1="1180.0" y1="570.0" x2="894.0" y2="570.0" stroke="#1B2430" stroke-width="1.6" marker-end="url(#arrowInk)"/>
+  <text x="1040.0" y="560.0" font-size="12.5" fill="#5B6B7C" text-anchor="middle" font-weight="normal">fetch only the leaf page needed</text>
+  <rect x="640.0" y="300.0" width="250.0" height="120.0" rx="8" fill="#FEF2F2" stroke="#B91C1C" stroke-width="1.5"/>
+  <text x="765.0" y="326.0" font-size="15" fill="#B91C1C" text-anchor="middle" font-weight="700">Without an index</text>
+  <text x="765.0" y="348.0" font-size="12.5" fill="#5B6B7C" text-anchor="middle" font-weight="normal">full table scan:</text>
+  <text x="765.0" y="367.0" font-size="12.5" fill="#5B6B7C" text-anchor="middle" font-weight="normal">read every page,</text>
+  <text x="765.0" y="386.0" font-size="12.5" fill="#5B6B7C" text-anchor="middle" font-weight="normal">cost grows with row count</text>
+  <line x1="765.0" y1="240.0" x2="765.0" y2="296.0" stroke="#B91C1C" stroke-width="1.6" marker-end="url(#arrowInk)" stroke-dasharray="5 4"/>
+  <line x1="765.0" y1="420.0" x2="765.0" y2="516.0" stroke="#B91C1C" stroke-width="1.6" marker-end="url(#arrowInk)" stroke-dasharray="5 4"/>
+  <text x="775.0" y="475.0" font-size="12.5" fill="#B91C1C" text-anchor="start" font-weight="normal">read ALL pages</text>
+  <text x="40.0" y="680.0" font-size="14" fill="#1B2430" text-anchor="start" font-weight="700">Why B+ trees fit the cloud:</text>
+  <text x="40.0" y="704.0" font-size="13.5" fill="#1B2430" text-anchor="start" font-weight="normal">•  High fan-out (hundreds of keys per page) keeps the tree 3–4 levels deep, so network/disk round-trips per lookup stay small.</text>
+  <text x="40.0" y="728.0" font-size="13.5" fill="#1B2430" text-anchor="start" font-weight="normal">•  Linked leaves make range queries ("all records created by tenant X between IDs a and b") a sequential read.</text>
+  <text x="40.0" y="752.0" font-size="13.5" fill="#1B2430" text-anchor="start" font-weight="normal">•  Splits and merges are local to one path, so many clients can read and write different parts of the index concurrently.</text>
+</svg>

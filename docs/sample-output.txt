@@ -1,0 +1,720 @@
+
+==============================================================
+   CloudVault Record Index  -  B+ Tree indexed record search
+   BLAST 01  |  B+ Tree x Cloud / Databases
+==============================================================
+Every stored cloud resource has a numeric record ID. A B+ tree
+of order 4 (max 3 keys per node) maps each ID to its
+metadata, so a lookup reads one node per level instead of
+scanning every record.
+
++------------------------------------------------------------+
+|  Index: 0 records   order 4   height 0                     |
++------------------------------------------------------------+
+|   1  Load sample cloud records                             |
+|   2  Add a record                                          |
+|   3  Search for a record by ID                             |
+|   4  Range search (ID from .. to)                          |
+|   5  Update a record's metadata                            |
+|   6  Delete a record                                       |
+|   7  Display B+ tree structure                             |
+|   8  Display all records (leaf-chain scan)                 |
+|   9  Index statistics                                      |
+|  10  Index lookup vs full table scan                       |
+|  11  Scalability experiment (1K .. 1M records)             |
+|  12  Rebuild index with a different order                  |
+|   0  Exit                                                  |
++------------------------------------------------------------+
+Select an option: 3
+
+--- Search by record ID ---------------------------------------------------
+  The index is empty. Load sample data (1) or add a record (2) first.
+
++------------------------------------------------------------+
+|  Index: 0 records   order 4   height 0                     |
++------------------------------------------------------------+
+|   1  Load sample cloud records                             |
+|   2  Add a record                                          |
+|   3  Search for a record by ID                             |
+|   4  Range search (ID from .. to)                          |
+|   5  Update a record's metadata                            |
+|   6  Delete a record                                       |
+|   7  Display B+ tree structure                             |
+|   8  Display all records (leaf-chain scan)                 |
+|   9  Index statistics                                      |
+|  10  Index lookup vs full table scan                       |
+|  11  Scalability experiment (1K .. 1M records)             |
+|  12  Rebuild index with a different order                  |
+|   0  Exit                                                  |
++------------------------------------------------------------+
+Select an option: abc
+  ! "abc" is not a whole number. Try again.
+Select an option: 1
+
+--- Load sample cloud records ---------------------------------------------
+  Inserted 24 records.
+  Node splits while loading: 11   Tree height: 3
+
++------------------------------------------------------------+
+|  Index: 24 records   order 4   height 3                    |
++------------------------------------------------------------+
+|   1  Load sample cloud records                             |
+|   2  Add a record                                          |
+|   3  Search for a record by ID                             |
+|   4  Range search (ID from .. to)                          |
+|   5  Update a record's metadata                            |
+|   6  Delete a record                                       |
+|   7  Display B+ tree structure                             |
+|   8  Display all records (leaf-chain scan)                 |
+|   9  Index statistics                                      |
+|  10  Index lookup vs full table scan                       |
+|  11  Scalability experiment (1K .. 1M records)             |
+|  12  Rebuild index with a different order                  |
+|   0  Exit                                                  |
++------------------------------------------------------------+
+Select an option: 7
+
+--- B+ tree structure (order 4) -------------------------------------------
+  L0 root       : [1034 1058]  
+  L1 internal   : [1012 1021]  [1040 1047]  [1066 1075 1090]  
+  L2 leaves     : [1003 1005 1008]  [1012 1015 1019]  [1021 1026 1029]  [1034 1038]  
+                  [1040 1044]  [1047 1052]  [1058 1063]  [1066 1070]  [1075 1081 1086]  
+                  [1090 1097]  
+
+  Leaf chain (used for range scans):
+  [1003 1005 1008] -> [1012 1015 1019] -> [1021 1026 1029] -> [1034 1038] -> [1040 1044] -> 
+    [1047 1052] -> [1058 1063] -> [1066 1070] -> [1075 1081 1086] -> [1090 1097] -> NULL
+
++------------------------------------------------------------+
+|  Index: 24 records   order 4   height 3                    |
++------------------------------------------------------------+
+|   1  Load sample cloud records                             |
+|   2  Add a record                                          |
+|   3  Search for a record by ID                             |
+|   4  Range search (ID from .. to)                          |
+|   5  Update a record's metadata                            |
+|   6  Delete a record                                       |
+|   7  Display B+ tree structure                             |
+|   8  Display all records (leaf-chain scan)                 |
+|   9  Index statistics                                      |
+|  10  Index lookup vs full table scan                       |
+|  11  Scalability experiment (1K .. 1M records)             |
+|  12  Rebuild index with a different order                  |
+|   0  Exit                                                  |
++------------------------------------------------------------+
+Select an option: 3
+
+--- Search by record ID ---------------------------------------------------
+  Record ID to find: 1052
+  Path from root to leaf:
+    level 0: internal [1034 1058]
+      level 1: internal [1040 1047]
+        level 2: leaf [1047 1052]
+  FOUND  #1052  acme-retail | Container-Image | us-west-2 | 1.10 GB | created 2026-04-07
+  Cost: 3 node reads, 6 key comparisons.
+
++------------------------------------------------------------+
+|  Index: 24 records   order 4   height 3                    |
++------------------------------------------------------------+
+|   1  Load sample cloud records                             |
+|   2  Add a record                                          |
+|   3  Search for a record by ID                             |
+|   4  Range search (ID from .. to)                          |
+|   5  Update a record's metadata                            |
+|   6  Delete a record                                       |
+|   7  Display B+ tree structure                             |
+|   8  Display all records (leaf-chain scan)                 |
+|   9  Index statistics                                      |
+|  10  Index lookup vs full table scan                       |
+|  11  Scalability experiment (1K .. 1M records)             |
+|  12  Rebuild index with a different order                  |
+|   0  Exit                                                  |
++------------------------------------------------------------+
+Select an option: 3
+
+--- Search by record ID ---------------------------------------------------
+  Record ID to find: 1050
+  Path from root to leaf:
+    level 0: internal [1034 1058]
+      level 1: internal [1040 1047]
+        level 2: leaf [1047 1052]
+  NOT FOUND  No record has ID 1050.
+  Cost: 3 node reads, 6 key comparisons.
+
++------------------------------------------------------------+
+|  Index: 24 records   order 4   height 3                    |
++------------------------------------------------------------+
+|   1  Load sample cloud records                             |
+|   2  Add a record                                          |
+|   3  Search for a record by ID                             |
+|   4  Range search (ID from .. to)                          |
+|   5  Update a record's metadata                            |
+|   6  Delete a record                                       |
+|   7  Display B+ tree structure                             |
+|   8  Display all records (leaf-chain scan)                 |
+|   9  Index statistics                                      |
+|  10  Index lookup vs full table scan                       |
+|  11  Scalability experiment (1K .. 1M records)             |
+|  12  Rebuild index with a different order                  |
+|   0  Exit                                                  |
++------------------------------------------------------------+
+Select an option: 4
+
+--- Range search ----------------------------------------------------------
+  From ID: 1020
+  To ID:   1050
+  ID      Tenant          Resource         Region           Size(GB)  Created
+  ----------------------------------------------------------------------------
+  1021    umbrella-labs   Container-Image  ca-central-1         1.40  2026-02-03
+  1026    initech         DB-Backup        us-west-2          410.00  2026-02-14
+  1029    northwind       VM-Snapshot      us-east-1           64.00  2026-02-21
+  1034    globex          Object           us-east-1            0.02  2026-03-01
+  1038    initech         Container-Image  ap-south-1           0.85  2026-03-10
+  1040    acme-retail     DB-Backup        us-east-1          512.00  2026-03-14
+  1044    northwind       Container-Image  us-east-1            2.60  2026-03-20
+  1047    umbrella-labs   DB-Backup        ca-central-1       240.00  2026-03-29
+  8 record(s), 1230.87 GB in total.
+  Cost: 3 node reads to reach the first leaf, then 5 leaves walked along the next-pointers.
+
++------------------------------------------------------------+
+|  Index: 24 records   order 4   height 3                    |
++------------------------------------------------------------+
+|   1  Load sample cloud records                             |
+|   2  Add a record                                          |
+|   3  Search for a record by ID                             |
+|   4  Range search (ID from .. to)                          |
+|   5  Update a record's metadata                            |
+|   6  Delete a record                                       |
+|   7  Display B+ tree structure                             |
+|   8  Display all records (leaf-chain scan)                 |
+|   9  Index statistics                                      |
+|  10  Index lookup vs full table scan                       |
+|  11  Scalability experiment (1K .. 1M records)             |
+|  12  Rebuild index with a different order                  |
+|   0  Exit                                                  |
++------------------------------------------------------------+
+Select an option: 4
+
+--- Range search ----------------------------------------------------------
+  From ID: 1090
+  To ID:   1080
+  (From was larger than To, so the bounds were swapped: 1080 .. 1090)
+  ID      Tenant          Resource         Region           Size(GB)  Created
+  ----------------------------------------------------------------------------
+  1081    globex          Container-Image  ap-south-1           0.95  2026-06-11
+  1086    acme-retail     VM-Snapshot      eu-west-1          150.00  2026-06-19
+  1090    northwind       DB-Backup        eu-west-1          860.00  2026-06-30
+  3 record(s), 1010.95 GB in total.
+  Cost: 3 node reads to reach the first leaf, then 2 leaves walked along the next-pointers.
+
++------------------------------------------------------------+
+|  Index: 24 records   order 4   height 3                    |
++------------------------------------------------------------+
+|   1  Load sample cloud records                             |
+|   2  Add a record                                          |
+|   3  Search for a record by ID                             |
+|   4  Range search (ID from .. to)                          |
+|   5  Update a record's metadata                            |
+|   6  Delete a record                                       |
+|   7  Display B+ tree structure                             |
+|   8  Display all records (leaf-chain scan)                 |
+|   9  Index statistics                                      |
+|  10  Index lookup vs full table scan                       |
+|  11  Scalability experiment (1K .. 1M records)             |
+|  12  Rebuild index with a different order                  |
+|   0  Exit                                                  |
++------------------------------------------------------------+
+Select an option: 2
+
+--- Add a record ----------------------------------------------------------
+  New record ID (1-999999): 1052
+  ! Record 1052 already exists. IDs are unique keys -
+    use option 5 to change its metadata instead.
+
++------------------------------------------------------------+
+|  Index: 24 records   order 4   height 3                    |
++------------------------------------------------------------+
+|   1  Load sample cloud records                             |
+|   2  Add a record                                          |
+|   3  Search for a record by ID                             |
+|   4  Range search (ID from .. to)                          |
+|   5  Update a record's metadata                            |
+|   6  Delete a record                                       |
+|   7  Display B+ tree structure                             |
+|   8  Display all records (leaf-chain scan)                 |
+|   9  Index statistics                                      |
+|  10  Index lookup vs full table scan                       |
+|  11  Scalability experiment (1K .. 1M records)             |
+|  12  Rebuild index with a different order                  |
+|   0  Exit                                                  |
++------------------------------------------------------------+
+Select an option: 2
+
+--- Add a record ----------------------------------------------------------
+  New record ID (1-999999): 1078
+  Tenant (account name): acme retail
+  ! Use 1-15 characters: letters, digits, '-' or '_' (no spaces).
+  Tenant (account name): acme-retail
+  Resource type:
+    1) Object
+    2) VM-Snapshot
+    3) DB-Backup
+    4) Log-Archive
+    5) Container-Image
+  Choose 1-5: 3
+  Region:
+    1) us-east-1
+    2) us-west-2
+    3) ca-central-1
+    4) eu-west-1
+    5) ap-south-1
+  Choose 1-5: 2
+  Size in GB (0.01 - 100000): lots
+  ! "lots" is not a number. Try again.
+  Size in GB (0.01 - 100000): 48.5
+  Created date (YYYY-MM-DD): 2026-02-30
+  ! Enter a real date between 2000 and 2100 as YYYY-MM-DD.
+  Created date (YYYY-MM-DD): 2026-08-21
+  Record 1078 indexed. Structural changes:
+    * Leaf [1075 1078 1081 1086] overflowed: split into [1075 1078] + [1081 1086], key 1081 copied up
+    * Internal [1066 1075 1081 1090] overflowed: split into [1066 1075] + [1090], key 1081 moved up
+
++------------------------------------------------------------+
+|  Index: 25 records   order 4   height 3                    |
++------------------------------------------------------------+
+|   1  Load sample cloud records                             |
+|   2  Add a record                                          |
+|   3  Search for a record by ID                             |
+|   4  Range search (ID from .. to)                          |
+|   5  Update a record's metadata                            |
+|   6  Delete a record                                       |
+|   7  Display B+ tree structure                             |
+|   8  Display all records (leaf-chain scan)                 |
+|   9  Index statistics                                      |
+|  10  Index lookup vs full table scan                       |
+|  11  Scalability experiment (1K .. 1M records)             |
+|  12  Rebuild index with a different order                  |
+|   0  Exit                                                  |
++------------------------------------------------------------+
+Select an option: 7
+
+--- B+ tree structure (order 4) -------------------------------------------
+  L0 root       : [1034 1058 1081]  
+  L1 internal   : [1012 1021]  [1040 1047]  [1066 1075]  [1090]  
+  L2 leaves     : [1003 1005 1008]  [1012 1015 1019]  [1021 1026 1029]  [1034 1038]  
+                  [1040 1044]  [1047 1052]  [1058 1063]  [1066 1070]  [1075 1078]  [1081 1086]  
+                  [1090 1097]  
+
+  Leaf chain (used for range scans):
+  [1003 1005 1008] -> [1012 1015 1019] -> [1021 1026 1029] -> [1034 1038] -> [1040 1044] -> 
+    [1047 1052] -> [1058 1063] -> [1066 1070] -> [1075 1078] -> [1081 1086] -> [1090 1097] -> NULL
+
++------------------------------------------------------------+
+|  Index: 25 records   order 4   height 3                    |
++------------------------------------------------------------+
+|   1  Load sample cloud records                             |
+|   2  Add a record                                          |
+|   3  Search for a record by ID                             |
+|   4  Range search (ID from .. to)                          |
+|   5  Update a record's metadata                            |
+|   6  Delete a record                                       |
+|   7  Display B+ tree structure                             |
+|   8  Display all records (leaf-chain scan)                 |
+|   9  Index statistics                                      |
+|  10  Index lookup vs full table scan                       |
+|  11  Scalability experiment (1K .. 1M records)             |
+|  12  Rebuild index with a different order                  |
+|   0  Exit                                                  |
++------------------------------------------------------------+
+Select an option: 5
+
+--- Update a record -------------------------------------------------------
+  Record ID to update: 1003
+  Current: #1003  initech | Log-Archive | us-east-1 | 48.30 GB | created 2026-01-02
+  Enter the new metadata (the ID stays the same):
+  Tenant (account name): initech
+  Resource type:
+    1) Object
+    2) VM-Snapshot
+    3) DB-Backup
+    4) Log-Archive
+    5) Container-Image
+  Choose 1-5: 4
+  Region:
+    1) us-east-1
+    2) us-west-2
+    3) ca-central-1
+    4) eu-west-1
+    5) ap-south-1
+  Choose 1-5: 5
+  Size in GB (0.01 - 100000): 52.75
+  Created date (YYYY-MM-DD): 2026-09-01
+  Updated: #1003  initech | Log-Archive | ap-south-1 | 52.75 GB | created 2026-09-01
+  The key did not change, so the tree structure is untouched.
+
++------------------------------------------------------------+
+|  Index: 25 records   order 4   height 3                    |
++------------------------------------------------------------+
+|   1  Load sample cloud records                             |
+|   2  Add a record                                          |
+|   3  Search for a record by ID                             |
+|   4  Range search (ID from .. to)                          |
+|   5  Update a record's metadata                            |
+|   6  Delete a record                                       |
+|   7  Display B+ tree structure                             |
+|   8  Display all records (leaf-chain scan)                 |
+|   9  Index statistics                                      |
+|  10  Index lookup vs full table scan                       |
+|  11  Scalability experiment (1K .. 1M records)             |
+|  12  Rebuild index with a different order                  |
+|   0  Exit                                                  |
++------------------------------------------------------------+
+Select an option: 6
+
+--- Delete a record -------------------------------------------------------
+  Record ID to delete: 1044
+  Deleting #1044  northwind | Container-Image | us-east-1 | 2.60 GB | created 2026-03-20
+  Record 1044 removed. Structural changes:
+    * Leaf underflow: merged two leaves into [1034 1038 1040], separator 1040 removed from parent
+
++------------------------------------------------------------+
+|  Index: 24 records   order 4   height 3                    |
++------------------------------------------------------------+
+|   1  Load sample cloud records                             |
+|   2  Add a record                                          |
+|   3  Search for a record by ID                             |
+|   4  Range search (ID from .. to)                          |
+|   5  Update a record's metadata                            |
+|   6  Delete a record                                       |
+|   7  Display B+ tree structure                             |
+|   8  Display all records (leaf-chain scan)                 |
+|   9  Index statistics                                      |
+|  10  Index lookup vs full table scan                       |
+|  11  Scalability experiment (1K .. 1M records)             |
+|  12  Rebuild index with a different order                  |
+|   0  Exit                                                  |
++------------------------------------------------------------+
+Select an option: 6
+
+--- Delete a record -------------------------------------------------------
+  Record ID to delete: 1038
+  Deleting #1038  initech | Container-Image | ap-south-1 | 0.85 GB | created 2026-03-10
+  Record 1038 removed. Structural changes:
+    * none - the leaf still meets minimum fill
+
++------------------------------------------------------------+
+|  Index: 23 records   order 4   height 3                    |
++------------------------------------------------------------+
+|   1  Load sample cloud records                             |
+|   2  Add a record                                          |
+|   3  Search for a record by ID                             |
+|   4  Range search (ID from .. to)                          |
+|   5  Update a record's metadata                            |
+|   6  Delete a record                                       |
+|   7  Display B+ tree structure                             |
+|   8  Display all records (leaf-chain scan)                 |
+|   9  Index statistics                                      |
+|  10  Index lookup vs full table scan                       |
+|  11  Scalability experiment (1K .. 1M records)             |
+|  12  Rebuild index with a different order                  |
+|   0  Exit                                                  |
++------------------------------------------------------------+
+Select an option: 6
+
+--- Delete a record -------------------------------------------------------
+  Record ID to delete: 1052
+  Deleting #1052  acme-retail | Container-Image | us-west-2 | 1.10 GB | created 2026-04-07
+  Record 1052 removed. Structural changes:
+    * Leaf underflow: merged two leaves into [1034 1040 1047], separator 1047 removed from parent
+    * Internal underflow: rotated a key from left sibling through parent, giving [1012] + [1034]
+
++------------------------------------------------------------+
+|  Index: 22 records   order 4   height 3                    |
++------------------------------------------------------------+
+|   1  Load sample cloud records                             |
+|   2  Add a record                                          |
+|   3  Search for a record by ID                             |
+|   4  Range search (ID from .. to)                          |
+|   5  Update a record's metadata                            |
+|   6  Delete a record                                       |
+|   7  Display B+ tree structure                             |
+|   8  Display all records (leaf-chain scan)                 |
+|   9  Index statistics                                      |
+|  10  Index lookup vs full table scan                       |
+|  11  Scalability experiment (1K .. 1M records)             |
+|  12  Rebuild index with a different order                  |
+|   0  Exit                                                  |
++------------------------------------------------------------+
+Select an option: 6
+
+--- Delete a record -------------------------------------------------------
+  Record ID to delete: 9999
+  ! No record has ID 9999. Nothing was deleted.
+
++------------------------------------------------------------+
+|  Index: 22 records   order 4   height 3                    |
++------------------------------------------------------------+
+|   1  Load sample cloud records                             |
+|   2  Add a record                                          |
+|   3  Search for a record by ID                             |
+|   4  Range search (ID from .. to)                          |
+|   5  Update a record's metadata                            |
+|   6  Delete a record                                       |
+|   7  Display B+ tree structure                             |
+|   8  Display all records (leaf-chain scan)                 |
+|   9  Index statistics                                      |
+|  10  Index lookup vs full table scan                       |
+|  11  Scalability experiment (1K .. 1M records)             |
+|  12  Rebuild index with a different order                  |
+|   0  Exit                                                  |
++------------------------------------------------------------+
+Select an option: 7
+
+--- B+ tree structure (order 4) -------------------------------------------
+  L0 root       : [1021 1058 1081]  
+  L1 internal   : [1012]  [1034]  [1066 1075]  [1090]  
+  L2 leaves     : [1003 1005 1008]  [1012 1015 1019]  [1021 1026 1029]  [1034 1040 1047]  
+                  [1058 1063]  [1066 1070]  [1075 1078]  [1081 1086]  [1090 1097]  
+
+  Leaf chain (used for range scans):
+  [1003 1005 1008] -> [1012 1015 1019] -> [1021 1026 1029] -> [1034 1040 1047] -> 
+    [1058 1063] -> [1066 1070] -> [1075 1078] -> [1081 1086] -> [1090 1097] -> NULL
+
++------------------------------------------------------------+
+|  Index: 22 records   order 4   height 3                    |
++------------------------------------------------------------+
+|   1  Load sample cloud records                             |
+|   2  Add a record                                          |
+|   3  Search for a record by ID                             |
+|   4  Range search (ID from .. to)                          |
+|   5  Update a record's metadata                            |
+|   6  Delete a record                                       |
+|   7  Display B+ tree structure                             |
+|   8  Display all records (leaf-chain scan)                 |
+|   9  Index statistics                                      |
+|  10  Index lookup vs full table scan                       |
+|  11  Scalability experiment (1K .. 1M records)             |
+|  12  Rebuild index with a different order                  |
+|   0  Exit                                                  |
++------------------------------------------------------------+
+Select an option: 10
+
+--- Index lookup vs full table scan ---------------------------------------
+  Record ID to look up: 1097
+  Result: found
+  B+ tree index   : 3 node reads, 6 key comparisons
+  Full table scan : 15 of 22 rows read (rows are stored in arrival order)
+  Index cost tracks the tree height (3); scan cost tracks the row count (22).
+
++------------------------------------------------------------+
+|  Index: 22 records   order 4   height 3                    |
++------------------------------------------------------------+
+|   1  Load sample cloud records                             |
+|   2  Add a record                                          |
+|   3  Search for a record by ID                             |
+|   4  Range search (ID from .. to)                          |
+|   5  Update a record's metadata                            |
+|   6  Delete a record                                       |
+|   7  Display B+ tree structure                             |
+|   8  Display all records (leaf-chain scan)                 |
+|   9  Index statistics                                      |
+|  10  Index lookup vs full table scan                       |
+|  11  Scalability experiment (1K .. 1M records)             |
+|  12  Rebuild index with a different order                  |
+|   0  Exit                                                  |
++------------------------------------------------------------+
+Select an option: 10
+
+--- Index lookup vs full table scan ---------------------------------------
+  Record ID to look up: 4242
+  Result: not found
+  B+ tree index   : 3 node reads, 6 key comparisons
+  Full table scan : 22 of 22 rows read (rows are stored in arrival order)
+  A missing ID is the worst case for a scan: every row must be read to
+  prove it is absent. The index proved it after 3 node reads.
+  Index cost tracks the tree height (3); scan cost tracks the row count (22).
+
++------------------------------------------------------------+
+|  Index: 22 records   order 4   height 3                    |
++------------------------------------------------------------+
+|   1  Load sample cloud records                             |
+|   2  Add a record                                          |
+|   3  Search for a record by ID                             |
+|   4  Range search (ID from .. to)                          |
+|   5  Update a record's metadata                            |
+|   6  Delete a record                                       |
+|   7  Display B+ tree structure                             |
+|   8  Display all records (leaf-chain scan)                 |
+|   9  Index statistics                                      |
+|  10  Index lookup vs full table scan                       |
+|  11  Scalability experiment (1K .. 1M records)             |
+|  12  Rebuild index with a different order                  |
+|   0  Exit                                                  |
++------------------------------------------------------------+
+Select an option: 9
+
+--- Index statistics ------------------------------------------------------
+  Records indexed       : 22
+  Order (max children)  : 4  (max 3 keys per node)
+  Height (levels)       : 3  = node reads per lookup
+  Total nodes           : 14  (5 internal, 9 leaves)
+  Average leaf fill     : 81.5%
+  Splits / merges / borrows so far : 13 / 2 / 1
+  Structural self-check : PASSED (sorted, balanced, all nodes within fill limits)
+
++------------------------------------------------------------+
+|  Index: 22 records   order 4   height 3                    |
++------------------------------------------------------------+
+|   1  Load sample cloud records                             |
+|   2  Add a record                                          |
+|   3  Search for a record by ID                             |
+|   4  Range search (ID from .. to)                          |
+|   5  Update a record's metadata                            |
+|   6  Delete a record                                       |
+|   7  Display B+ tree structure                             |
+|   8  Display all records (leaf-chain scan)                 |
+|   9  Index statistics                                      |
+|  10  Index lookup vs full table scan                       |
+|  11  Scalability experiment (1K .. 1M records)             |
+|  12  Rebuild index with a different order                  |
+|   0  Exit                                                  |
++------------------------------------------------------------+
+Select an option: 8
+
+--- All records in ID order -----------------------------------------------
+  ID      Tenant          Resource         Region           Size(GB)  Created
+  ----------------------------------------------------------------------------
+  1003    initech         Log-Archive      ap-south-1          52.75  2026-09-01
+  1005    globex          DB-Backup        us-east-1          300.00  2026-01-03
+  1008    acme-retail     Log-Archive      us-east-1           15.60  2026-01-05
+  1012    northwind       Object           eu-west-1            0.75  2026-01-09
+  1015    initech         Object           eu-west-1            3.20  2026-01-20
+  1019    globex          Log-Archive      ca-central-1        33.00  2026-01-28
+  1021    umbrella-labs   Container-Image  ca-central-1         1.40  2026-02-03
+  1026    initech         DB-Backup        us-west-2          410.00  2026-02-14
+  1029    northwind       VM-Snapshot      us-east-1           64.00  2026-02-21
+  1034    globex          Object           us-east-1            0.02  2026-03-01
+  1040    acme-retail     DB-Backup        us-east-1          512.00  2026-03-14
+  1047    umbrella-labs   DB-Backup        ca-central-1       240.00  2026-03-29
+  1058    acme-retail     Object           ap-south-1           2.10  2026-04-18
+  1063    umbrella-labs   Object           us-west-2            7.50  2026-04-27
+  1066    initech         VM-Snapshot      us-west-2           80.00  2026-05-02
+  1070    northwind       Object           ca-central-1         0.40  2026-05-12
+  1075    globex          VM-Snapshot      us-west-2          120.00  2026-05-22
+  1078    acme-retail     DB-Backup        us-west-2           48.50  2026-08-21
+  1081    globex          Container-Image  ap-south-1           0.95  2026-06-11
+  1086    acme-retail     VM-Snapshot      eu-west-1          150.00  2026-06-19
+  1090    northwind       DB-Backup        eu-west-1          860.00  2026-06-30
+  1097    umbrella-labs   Log-Archive      eu-west-1           22.80  2026-07-15
+  22 records, read left-to-right across 9 linked leaves.
+
++------------------------------------------------------------+
+|  Index: 22 records   order 4   height 3                    |
++------------------------------------------------------------+
+|   1  Load sample cloud records                             |
+|   2  Add a record                                          |
+|   3  Search for a record by ID                             |
+|   4  Range search (ID from .. to)                          |
+|   5  Update a record's metadata                            |
+|   6  Delete a record                                       |
+|   7  Display B+ tree structure                             |
+|   8  Display all records (leaf-chain scan)                 |
+|   9  Index statistics                                      |
+|  10  Index lookup vs full table scan                       |
+|  11  Scalability experiment (1K .. 1M records)             |
+|  12  Rebuild index with a different order                  |
+|   0  Exit                                                  |
++------------------------------------------------------------+
+Select an option: 11
+
+--- Scalability experiment ------------------------------------------------
+  Builds separate B+ trees of 1K, 10K, 100K and 1M random record IDs and
+  times lookups against a linear scan. Your current index is not changed.
+  Real database pages hold a few hundred keys; try 4 and then 128.
+  Node order for the experiment (3-512): 128
+
+  Records     Height     Nodes  Reads/find   Cmps/find     Index ns      Scan ns   Speed-up
+  -----------------------------------------------------------------------------------------
+  1,000            2        13         2.0        51.5         54.6        110.4         2x
+  10,000           2       119         2.0       104.4        109.3       1035.4         9x
+  100,000          3     1,116         3.0        93.7        147.3       9675.6        66x
+  1,000,000        3    11,431         3.0       157.6        296.0     108097.7       365x
+
+  Every 10x more records adds at most about one level to the tree, so
+  index cost grows like log(n) while scan cost grows linearly with n.
+
++------------------------------------------------------------+
+|  Index: 22 records   order 4   height 3                    |
++------------------------------------------------------------+
+|   1  Load sample cloud records                             |
+|   2  Add a record                                          |
+|   3  Search for a record by ID                             |
+|   4  Range search (ID from .. to)                          |
+|   5  Update a record's metadata                            |
+|   6  Delete a record                                       |
+|   7  Display B+ tree structure                             |
+|   8  Display all records (leaf-chain scan)                 |
+|   9  Index statistics                                      |
+|  10  Index lookup vs full table scan                       |
+|  11  Scalability experiment (1K .. 1M records)             |
+|  12  Rebuild index with a different order                  |
+|   0  Exit                                                  |
++------------------------------------------------------------+
+Select an option: 12
+
+--- Rebuild index with a different order ----------------------------------
+  Current order: 4. Small orders (3-5) make splits easy
+  to see; large orders (100+) are closer to real database pages.
+  New order (3-512): 3
+  Rebuilt 22 records with order 3. Height changed from 3 to 4.
+
++------------------------------------------------------------+
+|  Index: 22 records   order 3   height 4                    |
++------------------------------------------------------------+
+|   1  Load sample cloud records                             |
+|   2  Add a record                                          |
+|   3  Search for a record by ID                             |
+|   4  Range search (ID from .. to)                          |
+|   5  Update a record's metadata                            |
+|   6  Delete a record                                       |
+|   7  Display B+ tree structure                             |
+|   8  Display all records (leaf-chain scan)                 |
+|   9  Index statistics                                      |
+|  10  Index lookup vs full table scan                       |
+|  11  Scalability experiment (1K .. 1M records)             |
+|  12  Rebuild index with a different order                  |
+|   0  Exit                                                  |
++------------------------------------------------------------+
+Select an option: 7
+
+--- B+ tree structure (order 3) -------------------------------------------
+  L0 root       : [1040]  
+  L1 internal   : [1012 1021]  [1075]  
+  L2 internal   : [1005]  [1015]  [1029]  [1058 1066]  [1081 1090]  
+  L3 leaves     : [1003]  [1005 1008]  [1012]  [1015 1019]  [1021 1026]  [1029 1034]  
+                  [1040 1047]  [1058 1063]  [1066 1070]  [1075 1078]  [1081 1086]  [1090 1097]  
+
+  Leaf chain (used for range scans):
+  [1003] -> [1005 1008] -> [1012] -> [1015 1019] -> [1021 1026] -> [1029 1034] -> 
+    [1040 1047] -> [1058 1063] -> [1066 1070] -> [1075 1078] -> [1081 1086] -> [1090 1097] -> NULL
+
++------------------------------------------------------------+
+|  Index: 22 records   order 3   height 4                    |
++------------------------------------------------------------+
+|   1  Load sample cloud records                             |
+|   2  Add a record                                          |
+|   3  Search for a record by ID                             |
+|   4  Range search (ID from .. to)                          |
+|   5  Update a record's metadata                            |
+|   6  Delete a record                                       |
+|   7  Display B+ tree structure                             |
+|   8  Display all records (leaf-chain scan)                 |
+|   9  Index statistics                                      |
+|  10  Index lookup vs full table scan                       |
+|  11  Scalability experiment (1K .. 1M records)             |
+|  12  Rebuild index with a different order                  |
+|   0  Exit                                                  |
++------------------------------------------------------------+
+Select an option: 0
+
+Shutting down the index. Goodbye.

@@ -1,0 +1,10 @@
+cloud_index
+cloud_index.exe
+test_bplustree
+test_bplustree.exe
+*.o
+.DS_Store
+.vscode/
+build/
+node_modules/
+~$*

@@ -1,0 +1,129 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1500 1000" width="1500" height="1000"
+     font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" role="img" aria-label="Activity diagrams — menu loop and the search algorithm">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7"
+            orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="context-stroke"/>
+    </marker>
+    <marker id="arrowInk" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7"
+            orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#1B2430"/></marker>
+    <marker id="arrowLeaf" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6"
+            orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" fill="#15803D"/></marker>
+    <marker id="arrowRange" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6"
+            orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" fill="#7C3AED"/></marker>
+    <marker id="arrowPath" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7"
+            orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" fill="#F59E0B"/></marker>
+    <marker id="diamond" viewBox="0 0 14 10" refX="1" refY="5" markerWidth="14" markerHeight="10"
+            orient="auto-start-reverse"><path d="M 1 5 L 7 1 L 13 5 L 7 9 z" fill="#1B2430"/></marker>
+    <marker id="openArrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9"
+            orient="auto"><path d="M 0 0 L 10 5 L 0 10" fill="none" stroke="#1B2430" stroke-width="1.4"/></marker>
+    <marker id="triangle" viewBox="0 0 12 12" refX="11" refY="6" markerWidth="12" markerHeight="12"
+            orient="auto"><path d="M 0 0 L 12 6 L 0 12 z" fill="#FFFFFF" stroke="#1B2430" stroke-width="1.3"/></marker>
+  </defs>
+  <rect width="1500" height="1000" fill="#FFFFFF"/>
+  <text x="34" y="42" font-size="23" font-weight="600" fill="#1B2430">Activity diagrams — menu loop and the search algorithm</text>
+  <text x="34" y="66" font-size="14.5" fill="#5B6B7C">Left: how the application runs. Right: what option 3 does inside the B+ tree.</text>
+  <rect x="260" y="97" width="140" height="36" rx="18" fill="#1B2430"/>
+  <text x="330.0" y="120.0" font-size="13.5" fill="#FFFFFF" text-anchor="middle" font-weight="700">Start</text>
+  <line x1="330.0" y1="133.0" x2="330.0" y2="158.0" stroke="#1B2430" stroke-width="1.4" marker-end="url(#arrowInk)"/>
+  <rect x="180.0" y="160.0" width="300.0" height="46.0" rx="8" fill="#F1F5F9" stroke="#C3CEDA" stroke-width="1.5"/>
+  <text x="330.0" y="179.5" font-size="13" fill="#1B2430" text-anchor="middle" font-weight="normal">Create CloudIndexApp(order)</text>
+  <text x="330.0" y="196.5" font-size="13" fill="#1B2430" text-anchor="middle" font-weight="normal">print banner</text>
+  <line x1="330.0" y1="206.0" x2="330.0" y2="232.0" stroke="#1B2430" stroke-width="1.4" marker-end="url(#arrowInk)"/>
+  <rect x="180.0" y="234.0" width="300.0" height="46.0" rx="8" fill="#F1F5F9" stroke="#C3CEDA" stroke-width="1.5"/>
+  <text x="330.0" y="253.5" font-size="13" fill="#1B2430" text-anchor="middle" font-weight="normal">Print menu + status line</text>
+  <text x="330.0" y="270.5" font-size="13" fill="#1B2430" text-anchor="middle" font-weight="normal">(records, order, height)</text>
+  <line x1="330.0" y1="280.0" x2="330.0" y2="306.0" stroke="#1B2430" stroke-width="1.4" marker-end="url(#arrowInk)"/>
+  <rect x="180.0" y="308.0" width="300.0" height="40.0" rx="8" fill="#F1F5F9" stroke="#C3CEDA" stroke-width="1.5"/>
+  <text x="330.0" y="333.0" font-size="13" fill="#1B2430" text-anchor="middle" font-weight="normal">Read a line from the user</text>
+  <line x1="330.0" y1="348.0" x2="330.0" y2="372.0" stroke="#1B2430" stroke-width="1.4" marker-end="url(#arrowInk)"/>
+  <path d="M 330 373.0 L 450.0 418 L 330 463.0 L 210.0 418 Z" fill="#FEF3C7" stroke="#F59E0B" stroke-width="1.6"/>
+  <text x="330.0" y="415.0" font-size="12.5" fill="#1B2430" text-anchor="middle" font-weight="normal">whole number</text>
+  <text x="330.0" y="431.0" font-size="12.5" fill="#1B2430" text-anchor="middle" font-weight="normal">between 0 and 12?</text>
+  <line x1="450.0" y1="418.0" x2="530.0" y2="418.0" stroke="#B91C1C" stroke-width="1.4"/>
+  <line x1="530.0" y1="418.0" x2="530.0" y2="328.0" stroke="#B91C1C" stroke-width="1.4"/>
+  <line x1="530.0" y1="328.0" x2="482.0" y2="328.0" stroke="#B91C1C" stroke-width="1.4" marker-end="url(#arrowInk)"/>
+  <text x="458.0" y="438.0" font-size="12" fill="#B91C1C" text-anchor="start" font-weight="normal">no: print error,</text>
+  <text x="458.0" y="453.0" font-size="12" fill="#B91C1C" text-anchor="start" font-weight="normal">ask again</text>
+  <line x1="330.0" y1="463.0" x2="330.0" y2="492.0" stroke="#1B2430" stroke-width="1.4" marker-end="url(#arrowInk)"/>
+  <text x="338.0" y="482.0" font-size="12" fill="#0F766E" text-anchor="start" font-weight="normal">yes</text>
+  <path d="M 330 494.0 L 430.0 532 L 330 570.0 L 230.0 532 Z" fill="#FEF3C7" stroke="#F59E0B" stroke-width="1.6"/>
+  <text x="330.0" y="537.0" font-size="12.5" fill="#1B2430" text-anchor="middle" font-weight="normal">choice == 0 ?</text>
+  <line x1="230.0" y1="532.0" x2="130.0" y2="532.0" stroke="#1B2430" stroke-width="1.4"/>
+  <line x1="130.0" y1="532.0" x2="130.0" y2="900.0" stroke="#1B2430" stroke-width="1.4"/>
+  <line x1="130.0" y1="900.0" x2="258.0" y2="900.0" stroke="#1B2430" stroke-width="1.4" marker-end="url(#arrowInk)"/>
+  <text x="134.0" y="522.0" font-size="12" fill="#0F766E" text-anchor="start" font-weight="normal">yes</text>
+  <line x1="330.0" y1="570.0" x2="330.0" y2="598.0" stroke="#1B2430" stroke-width="1.4" marker-end="url(#arrowInk)"/>
+  <text x="338.0" y="590.0" font-size="12" fill="#5B6B7C" text-anchor="start" font-weight="normal">no</text>
+  <rect x="170.0" y="600.0" width="320.0" height="150.0" rx="8" fill="#F8FAFC" stroke="#0369A1" stroke-width="1.5"/>
+  <text x="330.0" y="637.5" font-size="13" fill="#1B2430" text-anchor="middle" font-weight="normal">Dispatch to the handler:</text>
+  <text x="330.0" y="654.5" font-size="13" fill="#1B2430" text-anchor="middle" font-weight="normal">1 load sample   2 add   3 search</text>
+  <text x="330.0" y="671.5" font-size="13" fill="#1B2430" text-anchor="middle" font-weight="normal">4 range   5 update   6 delete</text>
+  <text x="330.0" y="688.5" font-size="13" fill="#1B2430" text-anchor="middle" font-weight="normal">7 structure   8 all records   9 stats</text>
+  <text x="330.0" y="705.5" font-size="13" fill="#1B2430" text-anchor="middle" font-weight="normal">10 index vs scan   11 scalability</text>
+  <text x="330.0" y="722.5" font-size="13" fill="#1B2430" text-anchor="middle" font-weight="normal">12 rebuild with new order</text>
+  <line x1="330.0" y1="750.0" x2="330.0" y2="776.0" stroke="#1B2430" stroke-width="1.4" marker-end="url(#arrowInk)"/>
+  <rect x="180.0" y="778.0" width="300.0" height="46.0" rx="8" fill="#F1F5F9" stroke="#C3CEDA" stroke-width="1.5"/>
+  <text x="330.0" y="797.5" font-size="13" fill="#1B2430" text-anchor="middle" font-weight="normal">Handler validates its own input,</text>
+  <text x="330.0" y="814.5" font-size="13" fill="#1B2430" text-anchor="middle" font-weight="normal">prints result + structural changes</text>
+  <line x1="480.0" y1="801.0" x2="570.0" y2="801.0" stroke="#1B2430" stroke-width="1.4"/>
+  <line x1="570.0" y1="801.0" x2="570.0" y2="257.0" stroke="#1B2430" stroke-width="1.4"/>
+  <line x1="570.0" y1="257.0" x2="482.0" y2="257.0" stroke="#1B2430" stroke-width="1.4" marker-end="url(#arrowInk)"/>
+  <text x="576.0" y="640.0" font-size="12" fill="#5B6B7C" text-anchor="start" font-weight="normal">loop</text>
+  <rect x="260" y="882" width="140" height="36" rx="18" fill="#1B2430"/>
+  <text x="330.0" y="905.0" font-size="13.5" fill="#FFFFFF" text-anchor="middle" font-weight="700">Exit</text>
+  <text x="210.0" y="950.0" font-size="12" fill="#5B6B7C" text-anchor="start" font-weight="normal">End of input (Ctrl-D / end of piped file) also exits cleanly via InputClosed.</text>
+  <line x1="675.0" y1="95.0" x2="675.0" y2="960.0" stroke="#C3CEDA" stroke-width="1" stroke-dasharray="4 4"/>
+  <rect x="990" y="97" width="140" height="36" rx="18" fill="#1B2430"/>
+  <text x="1060.0" y="120.0" font-size="13.5" fill="#FFFFFF" text-anchor="middle" font-weight="700">search(key)</text>
+  <line x1="1060.0" y1="133.0" x2="1060.0" y2="158.0" stroke="#1B2430" stroke-width="1.4" marker-end="url(#arrowInk)"/>
+  <path d="M 1060 161.0 L 1160.0 196 L 1060 231.0 L 960.0 196 Z" fill="#FEF3C7" stroke="#F59E0B" stroke-width="1.6"/>
+  <text x="1060.0" y="201.0" font-size="12.5" fill="#1B2430" text-anchor="middle" font-weight="normal">tree empty?</text>
+  <line x1="1160.0" y1="196.0" x2="1310.0" y2="196.0" stroke="#1B2430" stroke-width="1.4"/>
+  <line x1="1310.0" y1="196.0" x2="1350.0" y2="196.0" stroke="#1B2430" stroke-width="1.4"/>
+  <line x1="1350.0" y1="196.0" x2="1350.0" y2="785.0" stroke="#1B2430" stroke-width="1.4"/>
+  <line x1="1350.0" y1="785.0" x2="1314.0" y2="785.0" stroke="#1B2430" stroke-width="1.4" marker-end="url(#arrowInk)"/>
+  <text x="1168.0" y="188.0" font-size="12" fill="#0F766E" text-anchor="start" font-weight="normal">yes</text>
+  <line x1="1060.0" y1="231.0" x2="1060.0" y2="258.0" stroke="#1B2430" stroke-width="1.4" marker-end="url(#arrowInk)"/>
+  <text x="1068.0" y="250.0" font-size="12" fill="#5B6B7C" text-anchor="start" font-weight="normal">no</text>
+  <rect x="920.0" y="260.0" width="280.0" height="40.0" rx="8" fill="#F1F5F9" stroke="#C3CEDA" stroke-width="1.5"/>
+  <text x="1060.0" y="285.0" font-size="13" fill="#1B2430" text-anchor="middle" font-weight="normal">node ← root   (count 1 node read)</text>
+  <line x1="1060.0" y1="300.0" x2="1060.0" y2="326.0" stroke="#1B2430" stroke-width="1.4" marker-end="url(#arrowInk)"/>
+  <path d="M 1060 328.0 L 1160.0 366 L 1060 404.0 L 960.0 366 Z" fill="#FEF3C7" stroke="#F59E0B" stroke-width="1.6"/>
+  <text x="1060.0" y="371.0" font-size="12.5" fill="#1B2430" text-anchor="middle" font-weight="normal">node is a leaf?</text>
+  <line x1="960.0" y1="366.0" x2="830.0" y2="366.0" stroke="#1B2430" stroke-width="1.4"/>
+  <text x="940.0" y="356.0" font-size="12" fill="#5B6B7C" text-anchor="end" font-weight="normal">no</text>
+  <rect x="730.0" y="400.0" width="260.0" height="64.0" rx="8" fill="#F8FAFC" stroke="#0369A1" stroke-width="1.5"/>
+  <text x="860.0" y="420.0" font-size="13" fill="#1B2430" text-anchor="middle" font-weight="normal">i ← number of separator</text>
+  <text x="860.0" y="437.0" font-size="13" fill="#1B2430" text-anchor="middle" font-weight="normal">keys ≤ key  (comparisons)</text>
+  <text x="860.0" y="454.0" font-size="13" fill="#1B2430" text-anchor="middle" font-weight="normal"></text>
+  <line x1="830.0" y1="366.0" x2="830.0" y2="398.0" stroke="#1B2430" stroke-width="1.4" marker-end="url(#arrowInk)"/>
+  <line x1="860.0" y1="464.0" x2="860.0" y2="490.0" stroke="#1B2430" stroke-width="1.4" marker-end="url(#arrowInk)"/>
+  <rect x="730.0" y="492.0" width="260.0" height="46.0" rx="8" fill="#F8FAFC" stroke="#0369A1" stroke-width="1.5"/>
+  <text x="860.0" y="511.5" font-size="13" fill="#1B2430" text-anchor="middle" font-weight="normal">node ← children[i]</text>
+  <text x="860.0" y="528.5" font-size="13" fill="#1B2430" text-anchor="middle" font-weight="normal">(1 more node read)</text>
+  <line x1="730.0" y1="515.0" x2="710.0" y2="515.0" stroke="#1B2430" stroke-width="1.4"/>
+  <line x1="710.0" y1="515.0" x2="710.0" y2="314.0" stroke="#1B2430" stroke-width="1.4"/>
+  <line x1="710.0" y1="314.0" x2="1056.0" y2="314.0" stroke="#1B2430" stroke-width="1.4" marker-end="url(#arrowInk)"/>
+  <text x="716.0" y="470.0" font-size="12" fill="#5B6B7C" text-anchor="start" font-weight="normal">repeat</text>
+  <line x1="1060.0" y1="404.0" x2="1060.0" y2="580.0" stroke="#1B2430" stroke-width="1.4" marker-end="url(#arrowInk)"/>
+  <text x="1068.0" y="430.0" font-size="12" fill="#0F766E" text-anchor="start" font-weight="normal">yes</text>
+  <rect x="920.0" y="582.0" width="280.0" height="46.0" rx="8" fill="#F1F5F9" stroke="#C3CEDA" stroke-width="1.5"/>
+  <text x="1060.0" y="601.5" font-size="13" fill="#1B2430" text-anchor="middle" font-weight="normal">scan leaf keys left to right</text>
+  <text x="1060.0" y="618.5" font-size="13" fill="#1B2430" text-anchor="middle" font-weight="normal">(stop early once key passed)</text>
+  <line x1="1060.0" y1="628.0" x2="1060.0" y2="656.0" stroke="#1B2430" stroke-width="1.4" marker-end="url(#arrowInk)"/>
+  <path d="M 1060 658.0 L 1160.0 696 L 1060 734.0 L 960.0 696 Z" fill="#FEF3C7" stroke="#F59E0B" stroke-width="1.6"/>
+  <text x="1060.0" y="701.0" font-size="12.5" fill="#1B2430" text-anchor="middle" font-weight="normal">key found?</text>
+  <line x1="1160.0" y1="696.0" x2="1230.0" y2="696.0" stroke="#1B2430" stroke-width="1.4"/>
+  <line x1="1230.0" y1="696.0" x2="1230.0" y2="760.0" stroke="#1B2430" stroke-width="1.4" marker-end="url(#arrowInk)"/>
+  <text x="1168.0" y="688.0" font-size="12" fill="#5B6B7C" text-anchor="start" font-weight="normal">no</text>
+  <rect x="1150.0" y="762.0" width="160.0" height="46.0" rx="8" fill="#FEF2F2" stroke="#B91C1C" stroke-width="1.5"/>
+  <text x="1230.0" y="781.5" font-size="13" fill="#1B2430" text-anchor="middle" font-weight="normal">return nullptr</text>
+  <text x="1230.0" y="798.5" font-size="13" fill="#1B2430" text-anchor="middle" font-weight="normal">→ "NOT FOUND"</text>
+  <line x1="1060.0" y1="734.0" x2="1060.0" y2="760.0" stroke="#1B2430" stroke-width="1.4" marker-end="url(#arrowInk)"/>
+  <text x="1068.0" y="752.0" font-size="12" fill="#0F766E" text-anchor="start" font-weight="normal">yes</text>
+  <rect x="910.0" y="762.0" width="220.0" height="46.0" rx="8" fill="#DCFCE7" stroke="#15803D" stroke-width="1.5"/>
+  <text x="1020.0" y="781.5" font-size="13" fill="#1B2430" text-anchor="middle" font-weight="normal">return &amp;records[i]</text>
+  <text x="1020.0" y="798.5" font-size="13" fill="#1B2430" text-anchor="middle" font-weight="normal">→ print record + cost</text>
+  <text x="760.0" y="930.0" font-size="13" fill="#1B2430" text-anchor="start" font-weight="600">Cost = height node reads, independent of where the key sits — every search ends at a leaf.</text>
+</svg>
