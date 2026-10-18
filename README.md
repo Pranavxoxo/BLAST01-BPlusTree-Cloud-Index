@@ -25,7 +25,7 @@ The program does more than return answers. It shows how the tree works as it run
 * a comparison of an **index lookup against a full table scan**,
 * a **1K → 1M record scalability experiment** with timing.
 
-The full research write-up is in [`docs/BLAST01-Report.md`](docs/BLAST01-Report.md), with a Word copy at [`docs/BLAST01-Report.docx`](docs/BLAST01-Report.docx).
+The full research write-up is in [`docs/BLAST01-Report.md`](docs/BLAST01-Report.md), with a Word copy at [`docs/BLAST01-Report.docx`](docs/BLAST01-Report.docx). The slides used in the YouTube video are in [`docs/BLAST01-Video-Presentation.pptx`](docs/BLAST01-Video-Presentation.pptx).
 
 ---
 
@@ -291,7 +291,8 @@ BLAST01-BPlusTree-Cloud-Index/
     ├── demo-input.txt       scripted input for `make demo`
     ├── sample-output.txt    full output of the demo run
     ├── test-output.txt
-    ├── video-script.md      YouTube presentation outline
+    ├── BLAST01-Video-Presentation.pptx   slides for the YouTube video (narration in speaker notes)
+    ├── video-script.md      how to record + YouTube title/description
     └── linkedin-post.md     LinkedIn post draft
 ```
 
