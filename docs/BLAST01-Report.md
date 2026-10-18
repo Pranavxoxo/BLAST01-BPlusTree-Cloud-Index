@@ -8,8 +8,8 @@
 | Link | URL |
 |---|---|
 | GitHub | https://github.com/Pranavxoxo/BLAST01-BPlusTree-Cloud-Index |
-| YouTube | *(add after upload)* |
-| LinkedIn | *(add after posting)* |
+| YouTube | https://youtu.be/BAbp8Kh--b8 |
+| LinkedIn | https://lnkd.in/p/gnaGYeny |
 
 ---
 
@@ -47,7 +47,7 @@ A B+ tree has an **order** *m*, which is the maximum number of children a node m
 
 Inside every node the keys are kept **sorted**. For an internal node with keys *k₀ < k₁ < … < kⱼ*, child *i* holds every key that is ≥ *kᵢ₋₁* and < *kᵢ*. That one rule is what lets a search discard all but one child at every level.
 
-![B+ tree built by the program from the sample data](diagrams/png/01-bplus-tree-structure.png)
+![B+ tree built by the program from the sample data](diagrams/01-bplus-tree-structure.png)
 
 *Figure 1: The B+ tree the program builds from its 24 sample records (order 4). This shape is copied from the program's own output (menu option 7).*
 
@@ -55,7 +55,7 @@ The minimum-fill rule is what keeps the tree balanced. Every node except the roo
 
 ### 2.3 B-tree vs B+ tree
 
-![B-tree vs B+ tree](diagrams/png/05-btree-vs-bplus-tree.png)
+![B-tree vs B+ tree](diagrams/05-btree-vs-bplus-tree.png)
 
 *Figure 2: The same seven keys in a B-tree and in a B+ tree.*
 
@@ -81,7 +81,7 @@ Start at the root. In each internal node, find the first separator greater than 
 
 Search for the *low* end of the range to reach the correct leaf. From there, read keys left to right, following each leaf's `next` pointer, until a key passes the *high* end. The tree is descended **once**, however many records the range returns.
 
-![Search path and range scan](diagrams/png/02-search-and-range-scan.png)
+![Search path and range scan](diagrams/02-search-and-range-scan.png)
 
 *Figure 3: Searching for 1052 reads 3 nodes. The range 1020–1050 descends once and then walks 5 linked leaves.*
 
@@ -92,7 +92,7 @@ Search for the *low* end of the range to reach the correct leaf. From there, rea
 3. If the parent now overflows, split it too. For an internal node, the middle key is **moved up** (not copied), because internal keys are only signposts.
 4. If the root splits, a new root is created above it. **This is the only way the tree gets taller**, and it adds a level above every leaf at once, so all leaves stay at the same depth.
 
-![Insert with cascading split](diagrams/png/03-insert-leaf-and-internal-split.png)
+![Insert with cascading split](diagrams/03-insert-leaf-and-internal-split.png)
 
 *Figure 4: Inserting record 1078 in the demo run. The leaf split cascades into an internal-node split.*
 
@@ -105,7 +105,7 @@ Search for the *low* end of the range to reach the correct leaf. From there, rea
 5. The parent may now be under-full in turn. It is repaired the same way: for internal nodes, borrowing *rotates* a key through the parent, and merging pulls the separator down.
 6. If the root is left with no keys, its only child becomes the new root and the height drops by one.
 
-![Delete with merge and borrow](diagrams/png/04-delete-merge-and-borrow.png)
+![Delete with merge and borrow](diagrams/04-delete-merge-and-borrow.png)
 
 *Figure 5: Deleting 1044 and then 1052 in the demo run: two leaf merges, then an internal-node borrow.*
 
@@ -213,7 +213,7 @@ What the numbers show:
 
 A cloud database is used by thousands of tenants at once, holds huge amounts of data, and keeps its storage on a separate network service rather than on the server's local disk. Each storage read therefore crosses a network. The question "give me record 1052" has to be answered in a handful of reads, whether the table holds a thousand rows or a billion.
 
-![B+ tree in a cloud database read path](diagrams/png/06-cloud-architecture.png)
+![B+ tree in a cloud database read path](diagrams/06-cloud-architecture.png)
 
 *Figure 6: Where the B+ tree sits in the read path of a managed cloud database.*
 
@@ -268,7 +268,6 @@ The program is a simulation of the data structure, not a cloud service: it runs 
 ```
 include/  CloudRecord.h   BPlusTree.h   CloudIndexApp.h   InputUtils.h
 src/      CloudRecord.cpp BPlusTree.cpp CloudIndexApp.cpp InputUtils.cpp  main.cpp
-tests/    test_bplustree.cpp
 ```
 
 * **`BPlusTree`** is the data structure. It knows nothing about menus or input. It contains a private nested `Node` struct (keys, children, records, `next`), recursive insert and delete helpers, and a `validate()` method that checks every invariant.
@@ -277,11 +276,11 @@ tests/    test_bplustree.cpp
 * **`CloudIndexApp`** is the menu. It owns the tree through a `unique_ptr` and keeps `arrivalOrder_` to model an unindexed table.
 * **`input` namespace** holds the validated input functions. They read whole lines and re-prompt on bad input, and they throw `InputClosed` at end of input so the program never loops forever.
 
-![UML class diagram](diagrams/png/07-uml-class-diagram.png)
+![UML class diagram](diagrams/07-uml-class-diagram.png)
 
 *Figure 7: UML class diagram.*
 
-![Activity diagram](diagrams/png/08-activity-diagram.png)
+![Activity diagram](diagrams/08-activity-diagram.png)
 
 *Figure 8: Activity diagrams for the menu loop and for the search algorithm.*
 
@@ -305,8 +304,9 @@ tests/    test_bplustree.cpp
 
 ## 9. Testing and results
 
-* **Automated tests** (`make test`). Every operation is mirrored in `std::map` as a reference answer, for orders 3–9 and 64, with 4,000 random inserts, deletes and searches per run. After **every** operation the tree's `validate()` checks sorted keys, fill limits, child counts, equal leaf depth, subtree key ranges, and the leaf chain. All checks pass (`docs/test-output.txt`).
-* **Scripted demonstration** (`make demo`). It feeds `docs/demo-input.txt` to the program. The full output is in `docs/sample-output.txt`, and terminal captures are in `docs/screenshots/`.
+* **Self-check.** The tree's `validate()` method checks sorted keys, fill limits, child counts, equal leaf depth, subtree key ranges, and the leaf chain. Menu option 9 runs it on the live index, and it reports PASSED after every sequence of splits, merges and borrows in the sample run.
+* **Stress testing during development.** Every operation was mirrored in `std::map` as a reference answer, for orders 3–9 and 64, with 4,000 random inserts, deletes and searches per run, and `validate()` re-run after every operation. All checks passed.
+* **Sample run.** The full output of a sample session is in `docs/sample-output.txt`, and terminal captures are in `docs/screenshots/`.
 * The run demonstrates normal operation (load, search, range, update, list) and these edge cases: empty index, invalid menu input, duplicate ID, invalid tenant, size and date input, missing IDs, reversed range, cascading split, leaf merges, and an internal borrow.
 
 ![Insert with split and delete with merge, terminal output](screenshots/04-insert-split-and-delete-merge.png)

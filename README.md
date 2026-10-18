@@ -8,8 +8,8 @@
 | Platform | Link |
 |---|---|
 | 📂 GitHub (this repo) | https://github.com/Pranavxoxo/BLAST01-BPlusTree-Cloud-Index |
-| ▶️ YouTube presentation | *(add link after upload)* |
-| 💼 LinkedIn post | *(add link after posting)* |
+| ▶️ YouTube presentation | https://youtu.be/BAbp8Kh--b8 |
+| 💼 LinkedIn post | https://lnkd.in/p/gnaGYeny |
 
 ---
 
@@ -25,7 +25,7 @@ The program does more than return answers. It shows how the tree works as it run
 * a comparison of an **index lookup against a full table scan**,
 * a **1K → 1M record scalability experiment** with timing.
 
-The full research write-up is in [`docs/BLAST01-Report.md`](docs/BLAST01-Report.md), with a Word copy at [`docs/BLAST01-Report.docx`](docs/BLAST01-Report.docx). The slides used in the YouTube video are in [`docs/BLAST01-Video-Presentation.pptx`](docs/BLAST01-Video-Presentation.pptx).
+The full research write-up is in [`docs/BLAST01-Report.md`](docs/BLAST01-Report.md), with a Word copy at [`docs/BLAST01-Report.docx`](docs/BLAST01-Report.docx).
 
 ---
 
@@ -38,7 +38,7 @@ A **B+ tree** is a balanced search tree where each node holds **many** sorted ke
 * **Order *m*** is the maximum number of children per node, so each node holds at most *m* − 1 keys. Every node except the root stays **at least half full**.
 * **All leaves are at the same depth.** The tree only grows taller when the root splits.
 
-![B+ tree built by the program](docs/diagrams/png/01-bplus-tree-structure.png)
+![B+ tree built by the program](docs/diagrams/01-bplus-tree-structure.png)
 
 | Operation | Cost (node / page reads) | How it works |
 |---|---|---|
@@ -49,9 +49,9 @@ A **B+ tree** is a balanced search tree where each node holds **many** sorted ke
 | Ordered listing | O(n) | Walk the leaf chain |
 | Space | O(n) | Nodes are 50–100% full |
 
-![Search path and range scan](docs/diagrams/png/02-search-and-range-scan.png)
+![Search path and range scan](docs/diagrams/02-search-and-range-scan.png)
 
-More diagrams: [insert with cascading split](docs/diagrams/png/03-insert-leaf-and-internal-split.png) · [delete with merge and borrow](docs/diagrams/png/04-delete-merge-and-borrow.png) · [B-tree vs B+ tree](docs/diagrams/png/05-btree-vs-bplus-tree.png)
+More diagrams: [insert with cascading split](docs/diagrams/03-insert-leaf-and-internal-split.png) · [delete with merge and borrow](docs/diagrams/04-delete-merge-and-borrow.png) · [B-tree vs B+ tree](docs/diagrams/05-btree-vs-bplus-tree.png)
 
 ---
 
@@ -65,7 +65,7 @@ Cloud databases store their data on network-attached storage, and every page rea
 
 **Real systems that use it:** Amazon DynamoDB storage nodes keep each partition's data in a B-tree. Amazon Aurora runs the MySQL/PostgreSQL B+ tree indexes on top of a storage layer that keeps six copies across three availability zones. Azure SQL Database's rowstore indexes are B+ trees. SQLite stores all table data in the leaves of its B-trees. Sources are listed in the [References](#references).
 
-![Where the B+ tree sits in a cloud database](docs/diagrams/png/06-cloud-architecture.png)
+![Where the B+ tree sits in a cloud database](docs/diagrams/06-cloud-architecture.png)
 
 ---
 
@@ -78,8 +78,6 @@ Requires a C++17 compiler (g++ 7+, clang 5+, or MSVC 2017+). No external librari
 ```bash
 make            # builds ./cloud_index
 make run        # builds and starts the interactive menu
-make test       # builds and runs the automated test suite
-make demo       # replays docs/demo-input.txt (the scripted demonstration)
 ```
 
 **Without make:**
@@ -178,7 +176,7 @@ Non-numeric or out-of-range menu input · duplicate IDs · searching, updating o
 
 ## Design (UML)
 
-![UML class diagram](docs/diagrams/png/07-uml-class-diagram.png)
+![UML class diagram](docs/diagrams/07-uml-class-diagram.png)
 
 ```mermaid
 classDiagram
@@ -246,20 +244,15 @@ classDiagram
     CloudIndexApp ..> CloudRecord : builds
 ```
 
-Activity diagram (menu loop and search algorithm): [`docs/diagrams/png/08-activity-diagram.png`](docs/diagrams/png/08-activity-diagram.png)
+Activity diagram (menu loop and search algorithm): [`docs/diagrams/08-activity-diagram.png`](docs/diagrams/08-activity-diagram.png)
 
 **Separation of concerns:** `BPlusTree` is a pure data structure with no input/output beyond printing itself. `CloudIndexApp` owns the menu and the scenario. All input is validated in one place (`InputUtils`).
 
 ---
 
-## Testing
+## Correctness check
 
-`make test` runs [`tests/test_bplustree.cpp`](tests/test_bplustree.cpp). It mirrors every operation in `std::map` and, after **every single** insert, delete or search, calls `validate()`. That method checks sorted keys, min/max fill, child counts, equal leaf depth, subtree key ranges, and the leaf chain. The tests cover orders 3–9 and 64, with 4,000 random operations each, plus targeted tests for an empty tree, duplicates, root split and collapse, and range queries.
-
-```
-Running B+ tree tests...
-All tests passed.
-```
+`BPlusTree::validate()` checks every B+ tree rule: sorted keys, min/max fill, child counts, equal leaf depth, subtree key ranges, and the leaf chain. Menu option 9 runs it on the live index and prints `Structural self-check : PASSED`. During development the tree was also stress-tested against `std::map` with thousands of random inserts, deletes and searches across several orders, with `validate()` re-run after every operation.
 
 ---
 
@@ -280,20 +273,11 @@ BLAST01-BPlusTree-Cloud-Index/
 │   ├── CloudIndexApp.cpp    the 12 menu operations + sample data
 │   ├── InputUtils.cpp
 │   └── main.cpp
-├── tests/
-│   └── test_bplustree.cpp   randomized tests against std::map
-├── tools/
-│   └── make_diagrams.py     regenerates the SVG diagrams
 └── docs/
     ├── BLAST01-Report.md    research / technical report (also .docx)
-    ├── diagrams/            8 diagrams (SVG + PNG): structure, search, split, merge, B vs B+, cloud, UML, activity
-    ├── screenshots/         terminal captures of the demo run
-    ├── demo-input.txt       scripted input for `make demo`
-    ├── sample-output.txt    full output of the demo run
-    ├── test-output.txt
-    ├── BLAST01-Video-Presentation.pptx   slides for the YouTube video (narration in speaker notes)
-    ├── video-script.md      how to record + YouTube title/description
-    └── linkedin-post.md     LinkedIn post draft
+    ├── diagrams/            structure, search, split, merge, B vs B+, cloud, UML, activity
+    ├── screenshots/         terminal captures of the program output
+    └── sample-output.txt    full output of a sample run
 ```
 
 ---
