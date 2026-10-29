@@ -29,6 +29,15 @@ The full research write-up is in [`docs/BLAST01-Report.md`](docs/BLAST01-Report.
 
 ---
 
+## Poster and abstract
+
+![BLAST 01 poster](docs/poster/BLAST01-Poster.jpg)
+
+* Poster (PowerPoint, 48 × 36 in): [`docs/poster/BLAST01-Poster.pptx`](docs/poster/BLAST01-Poster.pptx)
+* Abstract (Word): [`docs/poster/BLAST01-Poster-Abstract.docx`](docs/poster/BLAST01-Poster-Abstract.docx)
+
+---
+
 ## The data structure: B+ tree
 
 A **B+ tree** is a balanced search tree where each node holds **many** sorted keys and has **many** children. In a database each node is one storage page, so the tree is very wide and very shallow.
@@ -276,6 +285,7 @@ BLAST01-BPlusTree-Cloud-Index/
 └── docs/
     ├── BLAST01-Report.md    research / technical report (also .docx)
     ├── diagrams/            structure, search, split, merge, B vs B+, cloud, UML, activity
+    ├── poster/              poster (.pptx + .jpg) and poster abstract (.docx)
     ├── screenshots/         terminal captures of the program output
     └── sample-output.txt    full output of a sample run
 ```
